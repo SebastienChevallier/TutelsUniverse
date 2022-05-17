@@ -342,7 +342,7 @@ public class Modifier : MonoBehaviour
             {
                 for (int yy = 0; yy < areaOfEffectSize + AOExMod; yy++)
                 {
-                    heights[xx, yy] = Mathf.MoveTowards(heights[xx, yy], flattenHeight / 600, brush[xx - AOEzMod, yy - AOExMod] * strength);
+                    heights[xx, yy] = Mathf.MoveTowards(heights[xx, yy], /*flattenHeight / 600 */heights[xx, yy] / 100 , brush[xx - AOEzMod, yy - AOExMod] * strength);
                 }
             }
             targetTerrainData.SetHeights(x - AOExMod, z - AOEzMod, heights);

@@ -17,6 +17,6 @@ TerrainLayer:
   m_Smoothness: 0
   m_NormalScale: 1
   m_DiffuseRemapMin: {x: 0, y: 0, z: 0, w: 0}
-  m_DiffuseRemapMax: {x: 0, y: 0.31819725, z: 1, w: 1}
+  m_DiffuseRemapMax: {x: 0.007226743, y: 0.063082725, z: 0.5471698, w: 1}
   m_MaskMapRemapMin: {x: 0, y: 0, z: -0, w: 0}
   m_MaskMapRemapMax: {x: 1, y: 1, z: 0.0084, w: 1}

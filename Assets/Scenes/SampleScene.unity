@@ -319,7 +319,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -563,32 +563,32 @@ MonoBehaviour:
   listTextures:
   - name: Default
     index: 0
-    defaultTexture: 1
+    defaultTexture: 0
     minSteepness: 0
-    maxSteepness: 0
+    maxSteepness: 1
     minAltitude: 0
-    maxAltitude: 0.257
+    maxAltitude: 0.015
   - name: Rocks
     index: 1
     defaultTexture: 0
-    minSteepness: 0.69
+    minSteepness: 0.39
     maxSteepness: 1
-    minAltitude: 0.213
+    minAltitude: 0
     maxAltitude: 1
   - name: grass
     index: 2
-    defaultTexture: 0
+    defaultTexture: 1
     minSteepness: 0
-    maxSteepness: 0.725
-    minAltitude: 0.126
+    maxSteepness: 0
+    minAltitude: 0.257
     maxAltitude: 1
   - name: sand
     index: 3
     defaultTexture: 0
     minSteepness: 0
-    maxSteepness: 0
-    minAltitude: 0.034
-    maxAltitude: 0.164
+    maxSteepness: 0.46
+    minAltitude: 0.01
+    maxAltitude: 0.145
 --- !u!1 &1174800316
 GameObject:
   m_ObjectHideFlags: 0

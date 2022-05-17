@@ -26,7 +26,7 @@ public class Deplacement : MonoBehaviour
     {
         Vector3 dest = (Input.GetAxis("Horizontal") * speed * transform.right) + (Input.GetAxis("Vertical") * speed * transform.forward);
         rb.velocity = dest;
-        /*
+        
         if (transform.position.x >= 401)
         {
             transform.position = new Vector3(400, transform.position.y, transform.position.z);
@@ -43,7 +43,7 @@ public class Deplacement : MonoBehaviour
         if (transform.position.z <= -401)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y, -400);
-        }*/
+        }
 
     }
 
