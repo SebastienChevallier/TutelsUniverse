@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.EventSystems;
 
 public class Modifier : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Modifier : MonoBehaviour
 
     public TerrainParam paramTerrain;
     float[,] brush; // this stores the brush.png pixel data
+    public LayerMask mask;
 
     public TextureData textureData;
     public Material terrainMaterial;
@@ -22,11 +24,15 @@ public class Modifier : MonoBehaviour
     public GameObject decalPrefab;
     public Material decalMat;
     private GameObject decalProjector;
+    private int fingerID = -1;
 
     void Awake()
     {
         brush = GenerateBrush(paramTerrain.brushIMG[paramTerrain.brushSelection], paramTerrain.areaOfEffectSize); // This will take the brush image from our array and will resize it to the area of effect
         targetTerrain = FindObjectOfType<Terrain>(); // this will find terrain in your scene, alternatively, if you know you will only have one terrain, you can make it a public variable and assign it that way
+        #if !UNITY_EDITOR
+             fingerID = 0; 
+        #endif
     }
 
     private void Start()
@@ -43,8 +49,8 @@ public class Modifier : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {       
-            if (Physics.Raycast(ray, out hit, 100f))
-            {                
+            if (Physics.Raycast(ray, out hit, 100f, mask) && !EventSystem.current.IsPointerOverGameObject(fingerID))
+            {  
                 targetTerrain = GetTerrainAtObject(hit.transform.gameObject);
                 SetEditValues(targetTerrain);
                 GetTerrainCoordinates(hit, out int terX, out int terZ);

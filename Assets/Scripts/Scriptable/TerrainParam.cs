@@ -21,4 +21,14 @@ public class TerrainParam : ScriptableObject
     public float strength; // brush strength
     public float flattenHeight = 0; // the height to which the flatten mode will go
     public EffectType effectType;
+
+    public void SetSize(int size)
+    {
+        areaOfEffectSize = size;
+    }
+
+    public void SetStrength(float force)
+    {
+        strength = force;
+    }
 }
