@@ -14,7 +14,7 @@ public class TerrainParam : ScriptableObject
     };
 
     public Texture2D[] brushIMG; // This will allow you to switch brushes
-    public float[,] brush; // this stores the brush.png pixel data
+    
     public int brushSelection; // current selected brush
     public int areaOfEffectSize = 100; // size of the brush
     [Range(0.01f, 2f)] // you can remove this if you want
