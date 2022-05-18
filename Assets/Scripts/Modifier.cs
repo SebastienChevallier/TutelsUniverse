@@ -49,7 +49,7 @@ public class Modifier : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {       
-            if (Physics.Raycast(ray, out hit, 100f, mask) && !EventSystem.current.IsPointerOverGameObject(fingerID))
+            if (Physics.Raycast(ray, out hit, 100f, mask) && !EventSystem.current.IsPointerOverGameObject(fingerID) && paramTerrain.isTerraforming)
             {  
                 targetTerrain = GetTerrainAtObject(hit.transform.gameObject);
                 SetEditValues(targetTerrain);
@@ -65,7 +65,7 @@ public class Modifier : MonoBehaviour
             textureData.ApplyToMaterial(terrainMaterial);
         }
 
-        if (Physics.Raycast(ray, out hit, 100f))
+        if (Physics.Raycast(ray, out hit, 100f) && paramTerrain.isTerraforming)
         {
             decalProjector.SetActive(true);
             _gpu_scale(paramTerrain.brushIMG[paramTerrain.brushSelection], paramTerrain.areaOfEffectSize, paramTerrain.areaOfEffectSize, FilterMode.Trilinear);

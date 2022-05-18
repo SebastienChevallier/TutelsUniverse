@@ -16,6 +16,15 @@ public class UI_InGame : MonoBehaviour
         sliderTaille.value = paramTerrain.areaOfEffectSize;
     }
 
+    public void Terraforming()
+    {
+        paramTerrain.isTerraforming = true;
+    }
+    public void NotTerraforming()
+    {
+        paramTerrain.isTerraforming = false;
+    }
+
     public void Raise()
     {
         paramTerrain.effectType = TerrainParam.EffectType.raise;

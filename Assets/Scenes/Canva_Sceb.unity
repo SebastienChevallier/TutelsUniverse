@@ -5704,6 +5704,18 @@ MonoBehaviour:
           m_StringArgument: Btn_Outils
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 757266455}
+        m_TargetAssemblyTypeName: UI_InGame, Assembly-CSharp
+        m_MethodName: Terraforming
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &877589739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12114,6 +12126,18 @@ MonoBehaviour:
           m_StringArgument: Btn_Espece
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 757266455}
+        m_TargetAssemblyTypeName: UI_InGame, Assembly-CSharp
+        m_MethodName: NotTerraforming
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1889940050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13500,6 +13524,18 @@ MonoBehaviour:
           m_StringArgument: Btn_Environnement
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 757266455}
+        m_TargetAssemblyTypeName: UI_InGame, Assembly-CSharp
+        m_MethodName: NotTerraforming
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2096234641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13713,6 +13749,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Btn_Pouvoirs
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 757266455}
+        m_TargetAssemblyTypeName: UI_InGame, Assembly-CSharp
+        m_MethodName: NotTerraforming
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2120847529
