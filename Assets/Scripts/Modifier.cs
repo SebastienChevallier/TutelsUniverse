@@ -18,13 +18,13 @@ public class Modifier : MonoBehaviour
     float[,] brush; // this stores the brush.png pixel data
     public LayerMask mask;
 
-    public TextureData textureData;
+    //public TextureData textureData;
     public Material terrainMaterial;
 
     public GameObject decalPrefab;
     public Material decalMat;
     private GameObject decalProjector;
-    private int fingerID = -1;
+    private int fingerID = 0;
 
     void Awake()
     {
@@ -49,7 +49,7 @@ public class Modifier : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {       
-            if (Physics.Raycast(ray, out hit, 100f, mask) && !EventSystem.current.IsPointerOverGameObject(fingerID) && paramTerrain.isTerraforming)
+            if (Physics.Raycast(ray, out hit, mask) && !EventSystem.current.IsPointerOverGameObject() && paramTerrain.isTerraforming)
             {  
                 targetTerrain = GetTerrainAtObject(hit.transform.gameObject);
                 SetEditValues(targetTerrain);
@@ -62,7 +62,7 @@ public class Modifier : MonoBehaviour
         {
             
             //textureData.UpdateMeshHeights(terrainMaterial, 0, 100);
-            textureData.ApplyToMaterial(terrainMaterial);
+            //textureData.ApplyToMaterial(terrainMaterial);
         }
 
         if (Physics.Raycast(ray, out hit, 100f) && paramTerrain.isTerraforming)

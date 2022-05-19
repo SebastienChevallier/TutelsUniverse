@@ -16,40 +16,25 @@ public class Deplacement : MonoBehaviour
     void Update()
     {        
         Rotation();
+        Move();
     }
     private void FixedUpdate()
     {
-        Move();
+        
     }
 
     void Move()
     {
         Vector3 dest = (Input.GetAxis("Horizontal") * speed * transform.right) + (Input.GetAxis("Vertical") * speed * transform.forward);
-        rb.velocity = dest;
+        rb.AddForce(dest, ForceMode.Impulse);
+        //rb.velocity = dest * Time.deltaTime * 100f;
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -400, 400), transform.position.y, Mathf.Clamp(transform.position.z, -400, 400)); 
         
-        if (transform.position.x >= 401)
-        {
-            transform.position = new Vector3(400, transform.position.y, transform.position.z);
-        }
-        if (transform.position.x <= -401)
-        {
-            transform.position = new Vector3(-400, transform.position.y, transform.position.z);
-        }
-
-        if (transform.position.z >= 401)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, 400);
-        }
-        if (transform.position.z <= -401)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, -400);
-        }
 
     }
 
     void Rotation()
     {
-        transform.localEulerAngles = new Vector3(0, cam.transform.localEulerAngles.y, 0);
-        
+        transform.localEulerAngles = new Vector3(0, cam.transform.localEulerAngles.y, 0);        
     }
 }

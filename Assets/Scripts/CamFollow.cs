@@ -6,7 +6,7 @@ public class CamFollow : MonoBehaviour
 {
     public Transform objToFollow;
     public float posLerpSpeed;
-    public float rotaLerpSpeed;
+   
 
     // Update is called once per frame
     void Update()
