@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Terrains/TerrainData 1.asset.meta
 guid: 16af0eafe00327e4389effaa35cefa8c
+=======
+guid: 3840080defd78d54d80f7cc00fd6d65f
+>>>>>>> DevMerge:Assets/UIs/Canva.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 15600000
