@@ -6,6 +6,7 @@ public class CamFollow : MonoBehaviour
 {
     public Transform objToFollow;
     public float posLerpSpeed;
+    public AnimationCurve smoothCurve;
    
 
     // Update is called once per frame
@@ -16,7 +17,7 @@ public class CamFollow : MonoBehaviour
 
     void Follow()
     {
-        transform.position = Vector3.Lerp(transform.position, objToFollow.position, Time.deltaTime * posLerpSpeed);
+        transform.position = Vector3.Lerp(transform.position, objToFollow.position, smoothCurve.Evaluate(Time.fixedDeltaTime * posLerpSpeed));
         
     }
 }
