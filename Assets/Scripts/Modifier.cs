@@ -2,44 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.EventSystems;
 
 public class Modifier : MonoBehaviour
 {
     //place these where you would normally declare variables
     public Terrain targetTerrain; //The terrain obj you want to edit
-    float[,] terrainHeightMap;  //a 2d array of floats to store 
+    public float[,] terrainHeightMap;  //a 2d array of floats to store 
     int terrainHeightMapWidth; //Used to calculate click position
     int terrainHeightMapHeight;
     float[,] heights; //a variable to store the new heights
     TerrainData targetTerrainData; // stores the terrains terrain data
-    public enum EffectType
-    {
-        raise,
-        lower,
-        flatten,
-        smooth,        
-    };
 
-    public Texture2D[] brushIMG; // This will allow you to switch brushes
+    public TerrainParam paramTerrain;
     float[,] brush; // this stores the brush.png pixel data
-    public int brushSelection; // current selected brush
-    public int areaOfEffectSize = 100; // size of the brush
-    [Range(0.01f, 10f)] // you can remove this if you want
-    public float strength; // brush strength
-    public float flattenHeight = 0; // the height to which the flatten mode will go
-    public EffectType effectType;
+    public LayerMask mask;
 
-    public TextureData textureData;
+    //public TextureData textureData;
     public Material terrainMaterial;
 
     public GameObject decalPrefab;
     public Material decalMat;
     private GameObject decalProjector;
+    private int fingerID = 0;
 
     void Awake()
     {
-        brush = GenerateBrush(brushIMG[brushSelection], areaOfEffectSize); // This will take the brush image from our array and will resize it to the area of effect
+        brush = GenerateBrush(paramTerrain.brushIMG[paramTerrain.brushSelection], paramTerrain.areaOfEffectSize); // This will take the brush image from our array and will resize it to the area of effect
         targetTerrain = FindObjectOfType<Terrain>(); // this will find terrain in your scene, alternatively, if you know you will only have one terrain, you can make it a public variable and assign it that way
+        terrainHeightMap = GetCurrentTerrainHeightMap();
     }
 
     private void Start()
@@ -50,14 +41,14 @@ public class Modifier : MonoBehaviour
 
     void Update()
     {
-        SetBrushSize(areaOfEffectSize);
+        SetBrushSize(paramTerrain.areaOfEffectSize);
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Input.GetMouseButton(0))
         {       
-            if (Physics.Raycast(ray, out hit, 100f))
-            {                
+            if (Physics.Raycast(ray, out hit, mask) && !EventSystem.current.IsPointerOverGameObject(fingerID) && paramTerrain.isTerraforming)
+            {  
                 targetTerrain = GetTerrainAtObject(hit.transform.gameObject);
                 SetEditValues(targetTerrain);
                 GetTerrainCoordinates(hit, out int terX, out int terZ);
@@ -67,22 +58,20 @@ public class Modifier : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            
-            //textureData.UpdateMeshHeights(terrainMaterial, 0, 100);
-            textureData.ApplyToMaterial(terrainMaterial);
+            targetTerrain.gameObject.GetComponent<TextureModifier>().updateTextures();
         }
 
-        if (Physics.Raycast(ray, out hit, 100f))
+        if (Physics.Raycast(ray, out hit, 100f) && paramTerrain.isTerraforming)
         {
             decalProjector.SetActive(true);
-            _gpu_scale(brushIMG[brushSelection], areaOfEffectSize, areaOfEffectSize, FilterMode.Trilinear);
+            _gpu_scale(paramTerrain.brushIMG[paramTerrain.brushSelection], paramTerrain.areaOfEffectSize, paramTerrain.areaOfEffectSize, FilterMode.Trilinear);
             decalProjector.transform.position = hit.point;
             //decalProjector.transform.localScale = new Vector3(areaOfEffectSize , areaOfEffectSize , areaOfEffectSize );
-            Texture2D tempTex = brushIMG[brushSelection];
+            Texture2D tempTex = paramTerrain.brushIMG[paramTerrain.brushSelection];
             //tempTex.alphaIsTransparency = true;
             tempTex.Apply();
             decalMat.SetTexture("Base_Map", tempTex);            
-            decalProjector.transform.GetChild(0).GetComponent<DecalProjector>().size = new Vector3(areaOfEffectSize*1f, areaOfEffectSize*1f, areaOfEffectSize*1f);
+            decalProjector.transform.GetChild(0).GetComponent<DecalProjector>().size = new Vector3(paramTerrain.areaOfEffectSize *2f, paramTerrain.areaOfEffectSize *2f, paramTerrain.areaOfEffectSize *2f);
         }
         else
         {
@@ -128,7 +117,7 @@ public class Modifier : MonoBehaviour
 
     private void GetTerrainCoordinates(RaycastHit hit, out int x, out int z)
     {
-        int offset = areaOfEffectSize / 2; //This offsets the hit position to account for the size of the brush which gets drawn from the corner out
+        int offset = paramTerrain.areaOfEffectSize / 2; //This offsets the hit position to account for the size of the brush which gets drawn from the corner out
                                            //World Position Offset Coords, these can differ from the terrain coords if the terrain object is not at (0,0,0)
         Vector3 tempTerrainCoodinates = hit.point - hit.transform.position;
         //This takes the world coords and makes them relative to the terrain
@@ -262,25 +251,25 @@ public class Modifier : MonoBehaviour
     
     public void SetBrushSize(int value)//adds int value to brush size(make negative to shrink)
     {
-        areaOfEffectSize = value;
-        if (areaOfEffectSize > 200)
-        { areaOfEffectSize = 200; }
-        else if (areaOfEffectSize < 1)
-        { areaOfEffectSize = 1; }
-        brush = GenerateBrush(brushIMG[brushSelection], areaOfEffectSize); // regenerates the brush with new size
+        paramTerrain.areaOfEffectSize = value;
+        if (paramTerrain.areaOfEffectSize > 200)
+        { paramTerrain.areaOfEffectSize = 200; }
+        else if (paramTerrain.areaOfEffectSize < 1)
+        { paramTerrain.areaOfEffectSize = 1; }
+        brush = GenerateBrush(paramTerrain.brushIMG[paramTerrain.brushSelection], paramTerrain.areaOfEffectSize); // regenerates the brush with new size
     }
     public void SetBrushStrength(float value)//same idea as SetBrushSize()
     {
-        strength = value;
-        if (strength > 1)
-        { strength = 1; }
-        else if (strength < 0.01f)
-        { strength = 0.01f; }
+        paramTerrain.strength = value;
+        if (paramTerrain.strength > 1)
+        { paramTerrain.strength = 1; }
+        else if (paramTerrain.strength < 0.01f)
+        { paramTerrain.strength = 0.01f; }
     }
     public void SetBrush(int num)
     {
-        brushSelection = num;
-        brush = GenerateBrush(brushIMG[brushSelection], areaOfEffectSize);
+        paramTerrain.brushSelection = num;
+        brush = GenerateBrush(paramTerrain.brushIMG[paramTerrain.brushSelection], paramTerrain.areaOfEffectSize);
         //RMC.SetIndicators();
     }
 
@@ -295,74 +284,74 @@ public class Modifier : MonoBehaviour
         {
             AOExMod = x;
         }
-        else if (x + areaOfEffectSize > terrainHeightMapWidth)// if the brush goes off the posative end of the x axis we set the mod == to this
+        else if (x + paramTerrain.areaOfEffectSize > terrainHeightMapWidth)// if the brush goes off the posative end of the x axis we set the mod == to this
         {
-            AOExMod1 = x + areaOfEffectSize - terrainHeightMapWidth;
+            AOExMod1 = x + paramTerrain.areaOfEffectSize - terrainHeightMapWidth;
         }
 
         if (z < 0)//same as with x
         {
             AOEzMod = z;
         }
-        else if (z + areaOfEffectSize > terrainHeightMapHeight)
+        else if (z + paramTerrain.areaOfEffectSize > terrainHeightMapHeight)
         {
-            AOEzMod1 = z + areaOfEffectSize - terrainHeightMapHeight;
+            AOEzMod1 = z + paramTerrain.areaOfEffectSize - terrainHeightMapHeight;
         }
         
-        heights = targetTerrainData.GetHeights(x - AOExMod, z - AOEzMod, areaOfEffectSize + AOExMod - AOExMod1, areaOfEffectSize + AOEzMod - AOEzMod1); // this grabs the heightmap values within the brushes area of effect
+        heights = targetTerrainData.GetHeights(x - AOExMod, z - AOEzMod, paramTerrain.areaOfEffectSize + AOExMod - AOExMod1, paramTerrain.areaOfEffectSize + AOEzMod - AOEzMod1); // this grabs the heightmap values within the brushes area of effect
         
         ///Raise Terrain
-        if (effectType == EffectType.raise)
+        if (paramTerrain.effectType == TerrainParam.EffectType.raise)
         {
-            for (int xx = 0; xx < areaOfEffectSize + AOEzMod - AOEzMod1; xx++)
+            for (int xx = 0; xx < paramTerrain.areaOfEffectSize + AOEzMod - AOEzMod1; xx++)
             {
-                for (int yy = 0; yy < areaOfEffectSize + AOExMod - AOExMod1; yy++)
+                for (int yy = 0; yy < paramTerrain.areaOfEffectSize + AOExMod - AOExMod1; yy++)
                 {
-                    heights[xx, yy] += brush[xx - AOEzMod, yy - AOExMod] * strength; //for each point we raise the value  by the value of brush at the coords * the strength modifier
+                    heights[xx, yy] += brush[xx - AOEzMod, yy - AOExMod] * paramTerrain.strength; //for each point we raise the value  by the value of brush at the coords * the strength modifier
                 }
             }
             targetTerrainData.SetHeights(x - AOExMod, z - AOEzMod, heights); // This bit of code will save the change to the Terrain data file, this means that the changes will persist out of play mode into the edit mode
         }
         ///Lower Terrain, just the reverse of raise terrain
-        else if (effectType == EffectType.lower)
+        else if (paramTerrain.effectType == TerrainParam.EffectType.lower)
         {
-            for (int xx = 0; xx < areaOfEffectSize + AOEzMod; xx++)
+            for (int xx = 0; xx < paramTerrain.areaOfEffectSize + AOEzMod; xx++)
             {
-                for (int yy = 0; yy < areaOfEffectSize + AOExMod; yy++)
+                for (int yy = 0; yy < paramTerrain.areaOfEffectSize + AOExMod; yy++)
                 {
-                    heights[xx, yy] -= brush[xx - AOEzMod, yy - AOExMod] * strength;
+                    heights[xx, yy] -= brush[xx - AOEzMod, yy - AOExMod] * paramTerrain.strength;
                 }
             }
             targetTerrainData.SetHeights(x - AOExMod, z - AOEzMod, heights);
         }
         //this moves the current value towards our target value to flatten terrain
-        else if (effectType == EffectType.flatten)
+        /*else if (paramTerrain.effectType == TerrainParam.EffectType.flatten)
         {
-            for (int xx = 0; xx < areaOfEffectSize + AOEzMod; xx++)
+            for (int xx = 0; xx < paramTerrain.areaOfEffectSize + AOEzMod; xx++)
             {
-                for (int yy = 0; yy < areaOfEffectSize + AOExMod; yy++)
+                for (int yy = 0; yy < paramTerrain.areaOfEffectSize + AOExMod; yy++)
                 {
-                    heights[xx, yy] = Mathf.MoveTowards(heights[xx, yy], /*flattenHeight / 600 */heights[xx, yy] / 100 , brush[xx - AOEzMod, yy - AOExMod] * strength);
+                    heights[xx, yy] = Mathf.MoveTowards(heights[xx, yy], flattenHeight / 600 heights[xx, yy] / 100 , paramTerrain.brush[xx - AOEzMod, yy - AOExMod] * paramTerrain.strength);
                 }
             }
             targetTerrainData.SetHeights(x - AOExMod, z - AOEzMod, heights);
-        }
+        }*/
         //Takes the average of surrounding points and moves the point towards that height
-        else if (effectType == EffectType.smooth)
+        else if (paramTerrain.effectType == TerrainParam.EffectType.smooth)
         {
             float[,] heightAvg = new float[heights.GetLength(0), heights.GetLength(1)];
-            for (int xx = 0; xx < areaOfEffectSize + AOEzMod; xx++)
+            for (int xx = 0; xx < paramTerrain.areaOfEffectSize + AOEzMod; xx++)
             {
-                for (int yy = 0; yy < areaOfEffectSize + AOExMod; yy++)
+                for (int yy = 0; yy < paramTerrain.areaOfEffectSize + AOExMod; yy++)
                 {
                     heightAvg[xx, yy] = GetSurroundingHeights(heights, xx, yy); // calculates the value we want each point to move towards
                 }
             }
-            for (int xx1 = 0; xx1 < areaOfEffectSize + AOEzMod; xx1++)
+            for (int xx1 = 0; xx1 < paramTerrain.areaOfEffectSize + AOEzMod; xx1++)
             {
-                for (int yy1 = 0; yy1 < areaOfEffectSize + AOExMod; yy1++)
+                for (int yy1 = 0; yy1 < paramTerrain.areaOfEffectSize + AOExMod; yy1++)
                 {
-                    heights[xx1, yy1] = Mathf.MoveTowards(heights[xx1, yy1], heightAvg[xx1, yy1], brush[xx1 - AOEzMod, yy1 - AOExMod] * strength); // moves the points towards their targets
+                    heights[xx1, yy1] = Mathf.MoveTowards(heights[xx1, yy1], heightAvg[xx1, yy1], brush[xx1 - AOEzMod, yy1 - AOExMod] * paramTerrain.strength); // moves the points towards their targets
                 }
             }
             targetTerrainData.SetHeights(x - AOExMod, z - AOEzMod, heights);
