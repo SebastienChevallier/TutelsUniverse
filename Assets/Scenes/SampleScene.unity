@@ -551,9 +551,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 911122850}
+  - component: {fileID: 911122855}
   - component: {fileID: 911122852}
   - component: {fileID: 911122851}
   - component: {fileID: 911122853}
+  - component: {fileID: 911122854}
   m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
@@ -662,6 +664,60 @@ MonoBehaviour:
     maxSteepness: 0.46
     minAltitude: 0.01
     maxAltitude: 0.228
+--- !u!114 &911122854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911122849}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07eb00c7332d8f4488aa1b875e4dd99c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seed: 0
+  terrainData: {fileID: 0}
+  erosionRadius: 3
+  inertia: 0.05
+  sedimentCapacityFactor: 4
+  minSedimentCapacity: 0.01
+  erodeSpeed: 0.3
+  depositSpeed: 0.3
+  evaporateSpeed: 0.01
+  gravity: 4
+  maxDropletLifetime: 30
+  initialWaterVolume: 1
+  initialSpeed: 1
+--- !u!114 &911122855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911122849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: -1372625422
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 2147483647
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 1.8766667
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 23800000, guid: f620dfc1076f1444eacb4f5e743509b2, type: 2}
 --- !u!1 &1174800316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1002,12 +1058,14 @@ GameObject:
   - component: {fileID: 1869993326}
   - component: {fileID: 1869993329}
   - component: {fileID: 1869993328}
+  - component: {fileID: 1869993331}
+  - component: {fileID: 1869993330}
   m_Layer: 2
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1869993326
 Transform:
@@ -1074,3 +1132,32 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1869993325}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &1869993330
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869993325}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 1, z: 10}
+  m_Center: {x: 0, y: -0.5, z: 0}
+--- !u!208 &1869993331
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1869993325}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 5, y: 0.5, z: 5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: -0.5, z: 0}
+  m_TimeToStationary: 0.5

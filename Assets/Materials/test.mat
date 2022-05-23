@@ -10,7 +10,7 @@ Material:
   m_Name: test
   m_Shader: {fileID: 4800000, guid: 69c1f799e772cb6438f56c23efccb782, type: 3}
   m_ValidKeywords:
-  - _TERRAIN_INSTANCED_PERPIXEL_NORMAL
+  - _TERRAIN_BLEND_HEIGHT
   m_InvalidKeywords:
   - _GLOSSYREFLECTIONS_OFF
   m_LightmapFlags: 4
@@ -150,13 +150,13 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EnableHeightBlend: 0
-    - _EnableInstancedPerPixelNormal: 1
+    - _EnableHeightBlend: 1
+    - _EnableInstancedPerPixelNormal: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HeightTransition: 0
+    - _HeightTransition: 1
     - _Metallic: 0
     - _Metallic0: 0
     - _Metallic1: 0

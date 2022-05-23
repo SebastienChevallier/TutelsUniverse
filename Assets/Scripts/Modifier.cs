@@ -8,7 +8,7 @@ public class Modifier : MonoBehaviour
 {
     //place these where you would normally declare variables
     public Terrain targetTerrain; //The terrain obj you want to edit
-    float[,] terrainHeightMap;  //a 2d array of floats to store 
+    public float[,] terrainHeightMap;  //a 2d array of floats to store 
     int terrainHeightMapWidth; //Used to calculate click position
     int terrainHeightMapHeight;
     float[,] heights; //a variable to store the new heights
@@ -30,7 +30,7 @@ public class Modifier : MonoBehaviour
     {
         brush = GenerateBrush(paramTerrain.brushIMG[paramTerrain.brushSelection], paramTerrain.areaOfEffectSize); // This will take the brush image from our array and will resize it to the area of effect
         targetTerrain = FindObjectOfType<Terrain>(); // this will find terrain in your scene, alternatively, if you know you will only have one terrain, you can make it a public variable and assign it that way
-       
+        terrainHeightMap = GetCurrentTerrainHeightMap();
     }
 
     private void Start()
