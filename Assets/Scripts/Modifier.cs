@@ -8,7 +8,7 @@ public class Modifier : MonoBehaviour
 {
     //place these where you would normally declare variables
     public Terrain targetTerrain; //The terrain obj you want to edit
-    float[,] terrainHeightMap;  //a 2d array of floats to store 
+    public float[,] terrainHeightMap;  //a 2d array of floats to store 
     int terrainHeightMapWidth; //Used to calculate click position
     int terrainHeightMapHeight;
     float[,] heights; //a variable to store the new heights
@@ -30,9 +30,7 @@ public class Modifier : MonoBehaviour
     {
         brush = GenerateBrush(paramTerrain.brushIMG[paramTerrain.brushSelection], paramTerrain.areaOfEffectSize); // This will take the brush image from our array and will resize it to the area of effect
         targetTerrain = FindObjectOfType<Terrain>(); // this will find terrain in your scene, alternatively, if you know you will only have one terrain, you can make it a public variable and assign it that way
-        #if !UNITY_EDITOR
-             fingerID = 0; 
-        #endif
+        terrainHeightMap = GetCurrentTerrainHeightMap();
     }
 
     private void Start()
@@ -49,7 +47,7 @@ public class Modifier : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {       
-            if (Physics.Raycast(ray, out hit, mask) && !EventSystem.current.IsPointerOverGameObject() && paramTerrain.isTerraforming)
+            if (Physics.Raycast(ray, out hit, mask) && !EventSystem.current.IsPointerOverGameObject(fingerID) && paramTerrain.isTerraforming)
             {  
                 targetTerrain = GetTerrainAtObject(hit.transform.gameObject);
                 SetEditValues(targetTerrain);
@@ -60,9 +58,7 @@ public class Modifier : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            
-            //textureData.UpdateMeshHeights(terrainMaterial, 0, 100);
-            //textureData.ApplyToMaterial(terrainMaterial);
+            targetTerrain.gameObject.GetComponent<TextureModifier>().updateTextures();
         }
 
         if (Physics.Raycast(ray, out hit, 100f) && paramTerrain.isTerraforming)
@@ -75,7 +71,7 @@ public class Modifier : MonoBehaviour
             //tempTex.alphaIsTransparency = true;
             tempTex.Apply();
             decalMat.SetTexture("Base_Map", tempTex);            
-            decalProjector.transform.GetChild(0).GetComponent<DecalProjector>().size = new Vector3(paramTerrain.areaOfEffectSize *1f, paramTerrain.areaOfEffectSize *1f, paramTerrain.areaOfEffectSize *1f);
+            decalProjector.transform.GetChild(0).GetComponent<DecalProjector>().size = new Vector3(paramTerrain.areaOfEffectSize *2f, paramTerrain.areaOfEffectSize *2f, paramTerrain.areaOfEffectSize *2f);
         }
         else
         {
