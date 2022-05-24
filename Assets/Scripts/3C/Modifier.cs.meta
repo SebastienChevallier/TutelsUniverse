@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 74869e4f18ca7de45975f2d2079b6b47
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - targetTerrain: {instanceID: 0}
+  - paramTerrain: {fileID: 11400000, guid: 03b31a1be7c023345b7dc28fdf637ad4, type: 2}
+  - textureData: {instanceID: 0}
+  - terrainMaterial: {instanceID: 0}
+  - decalPrefab: {fileID: 5636204792708845391, guid: e04af9d315598a24ca581a164be751d3,
+      type: 3}
+  - decalMat: {fileID: 2100000, guid: 2f372b36724ebc64ebf24a4b36f215f9, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
