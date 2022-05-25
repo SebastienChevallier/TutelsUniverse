@@ -611,6 +611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   succes_Data: {fileID: 0}
+  selectedSucces: {fileID: 0}
 --- !u!1 &7145890907296862176
 GameObject:
   m_ObjectHideFlags: 0
