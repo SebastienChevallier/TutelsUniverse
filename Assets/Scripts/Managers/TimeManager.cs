@@ -12,7 +12,7 @@ public class TimeManager : MonoBehaviour
         timeLeft = data_Time._RateAnnee;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         timeLeft -= Time.deltaTime * data_Time._SelectedSpeed;        
 

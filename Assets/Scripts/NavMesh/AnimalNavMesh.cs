@@ -11,6 +11,7 @@ public class AnimalNavMesh : MonoBehaviour
 
     [Header("Personal Variables")]
     public float actualPV;
+    public float foodGauge = 100;
     public float age = 1f;
     public float anneeSpawn = 0;
 
@@ -18,10 +19,11 @@ public class AnimalNavMesh : MonoBehaviour
     public MeshFilter mesh;
     public GameObject vue;
     public GameObject contact;
-    public GameObject destination;
 
+    public Animator animatorAnimal;
     private NavMeshAgent agent;
     private float timeLeft;
+    private float timeFoodLeft;
 
 
 
@@ -30,16 +32,34 @@ public class AnimalNavMesh : MonoBehaviour
         RefreshPv();
         mesh.mesh = Animal_Data._Mesh;
         agent = GetComponent<NavMeshAgent>();
+        animatorAnimal = GetComponent<Animator>();
         agent.speed = Animal_Data._VitesseMax;
         timeLeft = 1;
+        anneeSpawn = Time_Data._Annee;
     }
 
     private void Update()
-    {
+    {        
         RefreshPv();
         RefreshAge();
         RefreshSize();
-        
+        RefreshFood();
+    }
+
+    void RefreshFood()
+    {
+        timeFoodLeft -= Time.deltaTime * Time_Data._SelectedSpeed;
+
+        if (timeFoodLeft < 0 && Time_Data._SelectedSpeed != 0)
+        {
+            timeFoodLeft = Time_Data._RateAnnee;
+            foodGauge--;
+            animatorAnimal.SetFloat("Food", foodGauge);
+            if (foodGauge < 0)
+            {
+                Destroy(transform.gameObject);
+            }
+        }
     }
 
     void RefreshPv()
@@ -48,6 +68,7 @@ public class AnimalNavMesh : MonoBehaviour
         {
             
             actualPV = Animal_Data._PVMax * Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite);
+            animatorAnimal.SetFloat("PV", actualPV);
         }
         else
         {
@@ -65,6 +86,7 @@ public class AnimalNavMesh : MonoBehaviour
     public void RefreshAge()
     {
         age = Time_Data._Annee - anneeSpawn;
+        animatorAnimal.SetFloat("Age", age);
     }
     
     public void Movement()
