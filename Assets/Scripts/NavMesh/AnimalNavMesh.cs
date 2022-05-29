@@ -14,6 +14,8 @@ public class AnimalNavMesh : MonoBehaviour
     public float foodGauge = 100;
     public float age = 1f;
     public float anneeSpawn = 0;
+    public List<GameObject> vueList;
+    public List<GameObject> contactList;
 
     [Header("Object Reference")]
     public MeshFilter mesh;
@@ -34,7 +36,7 @@ public class AnimalNavMesh : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animatorAnimal = GetComponent<Animator>();
         agent.speed = Animal_Data._VitesseMax;
-        timeLeft = 1;
+        timeLeft = Random.Range(0f, 2f);
         anneeSpawn = Time_Data._Annee;
     }
 
@@ -92,8 +94,18 @@ public class AnimalNavMesh : MonoBehaviour
     public void Movement()
     {
         agent.speed = Animal_Data._VitesseMax * Time_Data._SelectedSpeed;
+        Vector3 destination = transform.position;
 
-        Vector3 destination = transform.position + (Random.insideUnitSphere * 20);
+        if (vueList.Count > 0)
+        {
+            foreach(GameObject obj in vueList)
+            {
+                destination += obj.transform.position;
+            }
+            destination /= (vueList.Count + 1);
+        }
+
+        destination += (Random.insideUnitSphere * 10);
         destination.y = transform.position.y;
 
 
@@ -102,7 +114,7 @@ public class AnimalNavMesh : MonoBehaviour
         if (timeLeft < 0 && Time_Data._SelectedSpeed != 0)
         {
             
-            timeLeft = Time_Data._RateAnnee;
+            timeLeft = Time_Data._RateAnnee - Random.Range(0f, 2f);
             agent.SetDestination(destination);
 
         }
