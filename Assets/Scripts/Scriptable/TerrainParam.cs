@@ -8,9 +8,17 @@ public class TerrainParam : ScriptableObject
     public enum EffectType
     {
         raise,
-        lower,
-        //flatten,
+        lower,        
         smooth,
+    };
+
+    public enum AnimalType
+    {
+        Potamouss,
+        Lapillon,
+        Cerfeuil,
+        Raynodon,
+        Lomphore,
     };
 
     public Texture2D[] brushIMG; // This will allow you to switch brushes
@@ -21,6 +29,7 @@ public class TerrainParam : ScriptableObject
     public float strength; // brush strength
     public float flattenHeight = 0; // the height to which the flatten mode will go
     public EffectType effectType;
+    public AnimalType animalType;
     public bool isTerraforming = true;
 
     public void SetSize(int size)

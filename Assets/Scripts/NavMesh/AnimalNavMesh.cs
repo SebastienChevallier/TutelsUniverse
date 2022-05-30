@@ -31,6 +31,11 @@ public class AnimalNavMesh : MonoBehaviour
 
     private void Awake()
     {
+        InitAnimal();
+    }
+
+    public void InitAnimal()
+    {
         RefreshPv();
         mesh.mesh = Animal_Data._Mesh;
         agent = GetComponent<NavMeshAgent>();

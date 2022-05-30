@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.EventSystems;
+using UnityEngine.AI;
 
 public class Modifier : MonoBehaviour
 {
@@ -56,9 +57,10 @@ public class Modifier : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && paramTerrain.isTerraforming)
         {
             targetTerrain.gameObject.GetComponent<TextureModifier>().updateTextures();
+            targetTerrain.gameObject.GetComponent<NavMeshSurface>().UpdateNavMesh(targetTerrain.gameObject.GetComponent<NavMeshSurface>().navMeshData);
         }
 
         if (Physics.Raycast(ray, out hit, 100f) && paramTerrain.isTerraforming)
