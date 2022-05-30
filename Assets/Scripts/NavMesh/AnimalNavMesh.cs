@@ -42,6 +42,7 @@ public class AnimalNavMesh : MonoBehaviour
         animatorAnimal = GetComponent<Animator>();
         agent.speed = Animal_Data._VitesseMax;
         timeLeft = Random.Range(0f, 2f);
+        mesh.gameObject.GetComponent<MeshRenderer>().material = Animal_Data._Material;
         anneeSpawn = Time_Data._Annee;
     }
 

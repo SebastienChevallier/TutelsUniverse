@@ -63,7 +63,7 @@ public class JoystickCamera : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, minXClamp, xClamp);
         Vector3 targetRotation = transform.localEulerAngles;
         targetRotation.x = xRotation;
-        targetRotation.y += camDir.x * sensitivityX;
+        targetRotation.y -= camDir.x * sensitivityX;
         targetRotation.z = 0;
         transform.localEulerAngles = targetRotation;
     }
