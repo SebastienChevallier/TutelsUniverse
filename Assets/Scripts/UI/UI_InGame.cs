@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 public class UI_InGame : MonoBehaviour
 {
-    public TerrainParam paramTerrain;
-
-    
+    public TerrainParam paramTerrain;    
 
     public Slider sliderTaille;
     public Slider sliderForce;
