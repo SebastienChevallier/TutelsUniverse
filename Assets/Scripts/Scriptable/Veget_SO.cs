@@ -9,9 +9,6 @@ public class Veget_SO : ScriptableObject
     public GameObject Mesh_1;
     public GameObject Mesh_2;
     public GameObject Mesh_3;
-    public Material Material_1;
-    public Material Material_2;
-    public Material Material_3;
     public int Longévité;
     public AnimationCurve _CourbeVitalite;
     public AnimationCurve _CourbeScale;

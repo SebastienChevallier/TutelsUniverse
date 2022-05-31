@@ -15,10 +15,7 @@ MonoBehaviour:
   Name: Graine_1_Base
   Mesh_1: {fileID: 8870997614663939678, guid: 06ec9e0efde63464287526fae3c4afa8, type: 3}
   Mesh_2: {fileID: 8841650787700434854, guid: 45f79290b28f71e4bb535fa8d5dfcfd2, type: 3}
-  Mesh_3: {fileID: 8153243543665988224, guid: 191b550e26301cc4eb00ee901825356b, type: 3}
-  Material_1: {fileID: 0}
-  Material_2: {fileID: 0}
-  Material_3: {fileID: 0}
+  Mesh_3: {fileID: 7606338566114044537, guid: b5586f2b235d11a43a4b317d1222fb4d, type: 3}
   "Long\xE9vit\xE9": 500
   _CourbeVitalite:
     serializedVersion: 2
