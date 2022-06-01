@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class UI_InGame : MonoBehaviour
 {
-    public TerrainParam paramTerrain;
+    public TerrainParam paramTerrain;    
 
     public Slider sliderTaille;
     public Slider sliderForce;
@@ -23,6 +23,27 @@ public class UI_InGame : MonoBehaviour
     public void NotTerraforming()
     {
         paramTerrain.isTerraforming = false;
+    }
+
+    public void Potamouss()
+    {
+        paramTerrain.animalType = TerrainParam.AnimalType.Potamouss;
+    }
+    public void Cerfeuil()
+    {
+        paramTerrain.animalType = TerrainParam.AnimalType.Cerfeuil;
+    }
+    public void Lapillon()
+    {
+        paramTerrain.animalType = TerrainParam.AnimalType.Lapillon;
+    }
+    public void Lomphore()
+    {
+        paramTerrain.animalType = TerrainParam.AnimalType.Lomphore;
+    }
+    public void Raynodon()
+    {
+        paramTerrain.animalType = TerrainParam.AnimalType.Raynodon;
     }
 
     public void Raise()

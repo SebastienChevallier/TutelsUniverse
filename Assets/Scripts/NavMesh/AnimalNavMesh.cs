@@ -31,12 +31,18 @@ public class AnimalNavMesh : MonoBehaviour
 
     private void Awake()
     {
+        InitAnimal();
+    }
+
+    public void InitAnimal()
+    {
         RefreshPv();
         mesh.mesh = Animal_Data._Mesh;
         agent = GetComponent<NavMeshAgent>();
         animatorAnimal = GetComponent<Animator>();
         agent.speed = Animal_Data._VitesseMax;
         timeLeft = Random.Range(0f, 2f);
+        mesh.gameObject.GetComponent<MeshRenderer>().material = Animal_Data._Material;
         anneeSpawn = Time_Data._Annee;
     }
 
@@ -114,7 +120,7 @@ public class AnimalNavMesh : MonoBehaviour
         if (timeLeft < 0 && Time_Data._SelectedSpeed != 0)
         {
             
-            timeLeft = Time_Data._RateAnnee - Random.Range(-2f, 2f);
+            timeLeft = Time_Data._RateAnnee - Random.Range(-2f, Time_Data._RateAnnee);
             agent.SetDestination(destination);
 
         }

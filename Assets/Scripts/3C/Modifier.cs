@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.EventSystems;
+using UnityEngine.AI;
 
 public class Modifier : MonoBehaviour
 {
@@ -24,12 +25,12 @@ public class Modifier : MonoBehaviour
     public GameObject decalPrefab;
     public Material decalMat;
     private GameObject decalProjector;
-    private int fingerID = 0;
+   
 
     void Awake()
     {
         brush = GenerateBrush(paramTerrain.brushIMG[paramTerrain.brushSelection], paramTerrain.areaOfEffectSize); // This will take the brush image from our array and will resize it to the area of effect
-        targetTerrain = FindObjectOfType<Terrain>(); // this will find terrain in your scene, alternatively, if you know you will only have one terrain, you can make it a public variable and assign it that way
+        //targetTerrain = FindObjectOfType<Terrain>(); // this will find terrain in your scene, alternatively, if you know you will only have one terrain, you can make it a public variable and assign it that way
         terrainHeightMap = GetCurrentTerrainHeightMap();
     }
 
@@ -45,23 +46,25 @@ public class Modifier : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Input.GetMouseButton(0))
-        {       
-            if (Physics.Raycast(ray, out hit, mask) && !EventSystem.current.IsPointerOverGameObject(fingerID) && paramTerrain.isTerraforming)
-            {  
-                targetTerrain = GetTerrainAtObject(hit.transform.gameObject);
+        if (Input.GetMouseButton(0) && paramTerrain.isTerraforming)
+        {
+            if (Physics.Raycast(ray, out hit, 500f, mask) && !EventSystem.current.IsPointerOverGameObject())
+            {
+                
+                //targetTerrain = GetTerrainAtObject(hit.transform.gameObject);
                 SetEditValues(targetTerrain);
                 GetTerrainCoordinates(hit, out int terX, out int terZ);
                 ModifyTerrain(terX, terZ);
             }
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && paramTerrain.isTerraforming && !EventSystem.current.IsPointerOverGameObject())
         {
             targetTerrain.gameObject.GetComponent<TextureModifier>().updateTextures();
+            targetTerrain.gameObject.GetComponent<NavMeshSurface>().UpdateNavMesh(targetTerrain.gameObject.GetComponent<NavMeshSurface>().navMeshData);
         }
 
-        if (Physics.Raycast(ray, out hit, 100f) && paramTerrain.isTerraforming)
+        if (Physics.Raycast(ray, out hit, 500f) && paramTerrain.isTerraforming && !EventSystem.current.IsPointerOverGameObject())
         {
             decalProjector.SetActive(true);
             _gpu_scale(paramTerrain.brushIMG[paramTerrain.brushSelection], paramTerrain.areaOfEffectSize, paramTerrain.areaOfEffectSize, FilterMode.Trilinear);
@@ -71,7 +74,7 @@ public class Modifier : MonoBehaviour
             //tempTex.alphaIsTransparency = true;
             tempTex.Apply();
             decalMat.SetTexture("Base_Map", tempTex);            
-            decalProjector.transform.GetChild(0).GetComponent<DecalProjector>().size = new Vector3(paramTerrain.areaOfEffectSize *2f, paramTerrain.areaOfEffectSize *2f, paramTerrain.areaOfEffectSize *2f);
+            decalProjector.transform.GetChild(0).GetComponent<DecalProjector>().size = new Vector3(paramTerrain.areaOfEffectSize *1f, paramTerrain.areaOfEffectSize *1f, paramTerrain.areaOfEffectSize *1f);
         }
         else
         {
@@ -93,6 +96,7 @@ public class Modifier : MonoBehaviour
     {
         if (targetTerrain)
         {
+            
             return targetTerrain.terrainData;
         }
         return default(TerrainData);
@@ -102,6 +106,7 @@ public class Modifier : MonoBehaviour
     {
         if (targetTerrain)
         {
+            
             return targetTerrain;
         }
         return default(Terrain);
