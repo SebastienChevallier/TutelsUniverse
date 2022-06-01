@@ -19,6 +19,7 @@ public class JoystickCamera : MonoBehaviour
     public LayerMask maskCam;
     public float lerpTime = 5f;
     public AnimationCurve curve;    
+    public AnimationCurve camZoomCurve;    
     public Vector2 camDir;
 
     private GameObject player;
@@ -32,10 +33,12 @@ public class JoystickCamera : MonoBehaviour
     private void Update()
     {
         CameraRotation();
+        //playerCamera.transform.LookAt(transform);
     }
     
     private void FixedUpdate()
-    {        
+    {
+        
         CameraColision();
         RotateCam();
         Zoom();
@@ -46,24 +49,31 @@ public class JoystickCamera : MonoBehaviour
 
     }
 
-    private float zoomValue = -50f;
+    private float zoomValue = 50f;
 
     void Zoom()
     {
-        zoomValue += Input.GetAxis("Mouse ScrollWheel") * 20;
-        playerCamera.localPosition = new Vector3(playerCamera.localPosition.x, playerCamera.localPosition.y , zoomValue );
-        if (playerCamera.localPosition.z >= -1)
-            playerCamera.localPosition = new Vector3(playerCamera.localPosition.x, playerCamera.localPosition.y, -1.1f);
+        player.transform.parent.GetComponent<Deplacement>().speed = 15 * (zoomValue/50);
+        zoomValue = Mathf.Clamp(zoomValue, 1f, 50f);
+        zoomValue = Mathf.Lerp(zoomValue, zoomValue + Input.GetAxis("Mouse ScrollWheel") * 20, curve.Evaluate(Time.deltaTime * 20));
+
+        Debug.Log((zoomValue / 50));
+        playerCamera.localPosition = new Vector3(playerCamera.localPosition.x, playerCamera.localPosition.y, Mathf.Lerp(playerCamera.localPosition.y, -Vector3.Distance(transform.position, player.transform.position), 1 - (zoomValue / 50)));
+
+        //playerCamera.localPosition = new Vector3(playerCamera.localPosition.x, zoomValue, playerCamera.localPosition.z);
+
+        /*if (playerCamera.localPosition.z >= -1)
+            playerCamera.localPosition = new Vector3(playerCamera.localPosition.x, playerCamera.localPosition.y, -1.1f);*/
     }
     
 
     private void RotateCam()
     {        
-        xRotation += camDir.y;
+        xRotation -= camDir.y;
         xRotation = Mathf.Clamp(xRotation, minXClamp, xClamp);
         Vector3 targetRotation = transform.localEulerAngles;
         targetRotation.x = xRotation;
-        targetRotation.y -= camDir.x * sensitivityX;
+        targetRotation.y += camDir.x * sensitivityX;
         targetRotation.z = 0;
         transform.localEulerAngles = targetRotation;
     }
@@ -85,8 +95,7 @@ public class JoystickCamera : MonoBehaviour
     {
         RaycastHit hit;
         if(Physics.Raycast(transform.position, -transform.forward, out hit, camDistance, maskCam))
-        {
-            
+        {            
             playerCamera.position = hit.point + (playerCamera.forward * 3f);
         }        
     }
