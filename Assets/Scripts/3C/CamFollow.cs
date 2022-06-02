@@ -17,7 +17,9 @@ public class CamFollow : MonoBehaviour
 
     void Follow()
     {
-        transform.position = Vector3.Lerp(transform.position, objToFollow.position, smoothCurve.Evaluate(Time.fixedDeltaTime * posLerpSpeed));
+        Vector3 pos = objToFollow.position;
+        pos.y = 100;
+        transform.position = Vector3.Lerp(transform.position, pos, smoothCurve.Evaluate(Time.fixedDeltaTime * posLerpSpeed));
         
     }
 }

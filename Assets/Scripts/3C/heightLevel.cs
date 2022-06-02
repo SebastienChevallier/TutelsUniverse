@@ -20,12 +20,14 @@ public class heightLevel : MonoBehaviour
             CheckHeights();
     }   
 
-    void CheckHeights()
+    public Vector3 CheckHeights()
     {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -transform.up, out hit, 110, mask))
         {
             playerLookAt.transform.position = hit.point;
+            return hit.point;
         }
+        return Vector3.zero;
     }
 }
