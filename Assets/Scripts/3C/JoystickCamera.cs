@@ -14,14 +14,24 @@ public class JoystickCamera : MonoBehaviour
     [SerializeField] float xClamp = 85f;
     [SerializeField] float minXClamp = 0f;
 
-     
+    
     public float camDistance;
     public LayerMask maskCam;
+    
+    [Header("Lerp Move")]
     public float lerpTime = 5f;
     public AnimationCurve curve;    
-    public AnimationCurve camZoomCurve;    
-    public Vector2 camDir;
+       
+    
+    [Header("Lerp Zoom")]
+    public float ZoomTimeCam = 5f;
+    public AnimationCurve camZoomCurve;
 
+    [Header("Lerp CamDist")]
+    public float lerpTimeCam = 5f;
+    public AnimationCurve camDistCurve;
+
+    public Vector2 camDir;
     private GameObject player;
 
     private void Start()
@@ -38,41 +48,60 @@ public class JoystickCamera : MonoBehaviour
     
     private void FixedUpdate()
     {
-        
+        ChangeAngleCam();
         CameraColision();
         RotateCam();
         Zoom();
 
-        Vector3 relativePos = player.transform.position - playerCamera.position;        
+        Vector3 relativePos = (player.transform.position + Vector3.up * 2f) - playerCamera.position;        
         Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
         playerCamera.rotation = Quaternion.Lerp(playerCamera.rotation, rotation, curve.Evaluate(Time.deltaTime * lerpTime));
-
+        
     }
 
     private float zoomValue = 50f;
 
     void Zoom()
     {
-        player.transform.parent.GetComponent<Deplacement>().speed = 15 * (zoomValue/50);
+        player.transform.parent.GetComponent<Deplacement>().speed = 15 * (1-zoomValue/50)+3;
         zoomValue = Mathf.Clamp(zoomValue, 1f, 50f);
-        zoomValue = Mathf.Lerp(zoomValue, zoomValue + Input.GetAxis("Mouse ScrollWheel") * 20, curve.Evaluate(Time.deltaTime * 20));
+        zoomValue = Mathf.Lerp(zoomValue, zoomValue + Input.GetAxis("Mouse ScrollWheel") * 200, camZoomCurve.Evaluate(Time.deltaTime * ZoomTimeCam));
 
-        Debug.Log((zoomValue / 50));
-        playerCamera.localPosition = new Vector3(playerCamera.localPosition.x, playerCamera.localPosition.y, Mathf.Lerp(playerCamera.localPosition.y, -Vector3.Distance(transform.position, player.transform.position), 1 - (zoomValue / 50)));
+        
+        //playerCamera.localPosition = new Vector3(playerCamera.localPosition.x, playerCamera.localPosition.y, Mathf.Lerp(playerCamera.localPosition.y, -Vector3.Distance(transform.position, player.transform.position), 1 - (zoomValue / 50)));
 
-        //playerCamera.localPosition = new Vector3(playerCamera.localPosition.x, zoomValue, playerCamera.localPosition.z);
+        Vector3 heigt = player.transform.parent.GetComponent<heightLevel>().CheckHeights();
+        Debug.Log(zoomValue / 50);
+        playerCamera.localPosition = new Vector3(playerCamera.localPosition.x, playerCamera.localPosition.y, -(50 * camDistCurve.Evaluate(zoomValue / 50)));
 
-        /*if (playerCamera.localPosition.z >= -1)
-            playerCamera.localPosition = new Vector3(playerCamera.localPosition.x, playerCamera.localPosition.y, -1.1f);*/
+
+        Vector3 pos = new Vector3(transform.position.x,100, transform.position.z);
+        transform.position = Vector3.Lerp(pos, heigt + Vector3.up*2, (zoomValue / 50));
+             
     }
     
+    private void ChangeAngleCam()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            if(zoomValue < 25)
+            {
+                zoomValue = 50f;
+            }
+            else
+            {
+                zoomValue = 1f;
+            }
+        }
+    }
 
     private void RotateCam()
     {        
         xRotation -= camDir.y;
+        zoomValue += camDir.y;
         xRotation = Mathf.Clamp(xRotation, minXClamp, xClamp);
         Vector3 targetRotation = transform.localEulerAngles;
-        targetRotation.x = xRotation;
+        //targetRotation.x = xRotation;
         targetRotation.y += camDir.x * sensitivityX;
         targetRotation.z = 0;
         transform.localEulerAngles = targetRotation;
@@ -94,7 +123,7 @@ public class JoystickCamera : MonoBehaviour
     void CameraColision()
     {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, -transform.forward, out hit, camDistance, maskCam))
+        if(Physics.Raycast(transform.position, -transform.forward, out hit, 50, maskCam))
         {            
             playerCamera.position = hit.point + (playerCamera.forward * 3f);
         }        
