@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1857638427637593836
+--- !u!1 &1661042355634942588
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4876057399655906886}
-  - component: {fileID: 9099233379876631294}
-  - component: {fileID: 990762855761276910}
+  - component: {fileID: 5575915010572171990}
+  - component: {fileID: 8109969155885102702}
+  - component: {fileID: 249238289771850622}
   m_Layer: 0
   m_Name: Hibiscus_Sans_Fleurs_LOD3
   m_TagString: Untagged
@@ -18,36 +18,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4876057399655906886
+--- !u!4 &5575915010572171990
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857638427637593836}
+  m_GameObject: {fileID: 1661042355634942588}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6549808207737877743}
+  m_Father: {fileID: 6066078951928557695}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &9099233379876631294
+--- !u!33 &8109969155885102702
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857638427637593836}
+  m_GameObject: {fileID: 1661042355634942588}
   m_Mesh: {fileID: -8862473827180175795, guid: a3513d2e35c156148949fc7ccdec4837, type: 3}
---- !u!23 &990762855761276910
+--- !u!23 &249238289771850622
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1857638427637593836}
+  m_GameObject: {fileID: 1661042355634942588}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -83,7 +83,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &2535366102692023291
+--- !u!1 &3074526047520701555
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,76 +91,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6549808207737877743}
-  - component: {fileID: 1031567306390107150}
-  m_Layer: 0
-  m_Name: Hibiscus_Sans_Fleurs
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6549808207737877743
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2535366102692023291}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.86, y: 0, z: 19.99}
-  m_LocalScale: {x: 35, y: 35, z: 35}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5908098643485076971}
-  - {fileID: 4925958586980004197}
-  - {fileID: 8806315817555045721}
-  - {fileID: 4876057399655906886}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!205 &1031567306390107150
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2535366102692023291}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: 0.0056198426, y: 0.052733466, z: 0.003489174}
-  m_Size: 0.16108027
-  m_FadeMode: 2
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.8047885
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 8966505729093700967}
-  - screenRelativeHeight: 0.62760854
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 9078897273143254900}
-  - screenRelativeHeight: 0.49819195
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 6317318806992375602}
-  - screenRelativeHeight: 0.033437483
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 990762855761276910}
-  m_Enabled: 1
---- !u!1 &2621222872611535075
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5908098643485076971}
-  - component: {fileID: 5296240393504836576}
-  - component: {fileID: 8966505729093700967}
+  - component: {fileID: 6861046152896096635}
+  - component: {fileID: 5137089736173014896}
+  - component: {fileID: 8261272983921297911}
   m_Layer: 0
   m_Name: Hibiscus_Sans_Fleurs_LOD0
   m_TagString: Untagged
@@ -168,36 +101,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5908098643485076971
+--- !u!4 &6861046152896096635
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2621222872611535075}
+  m_GameObject: {fileID: 3074526047520701555}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6549808207737877743}
+  m_Father: {fileID: 6066078951928557695}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5296240393504836576
+--- !u!33 &5137089736173014896
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2621222872611535075}
+  m_GameObject: {fileID: 3074526047520701555}
   m_Mesh: {fileID: -6961166882880001604, guid: 0030297861f9100419e27c09df1e6a8b, type: 3}
---- !u!23 &8966505729093700967
+--- !u!23 &8261272983921297911
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2621222872611535075}
+  m_GameObject: {fileID: 3074526047520701555}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -233,7 +166,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &8265266975803405875
+--- !u!1 &3307317230618660715
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -241,82 +174,66 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8806315817555045721}
-  - component: {fileID: 6207672759231305573}
-  - component: {fileID: 6317318806992375602}
+  - component: {fileID: 6066078951928557695}
+  - component: {fileID: 43419207093874846}
   m_Layer: 0
-  m_Name: Hibiscus_Sans_Fleurs_LOD2
+  m_Name: Hibiscus_Sans_Fleurs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8806315817555045721
+--- !u!4 &6066078951928557695
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8265266975803405875}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.000010564162, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_GameObject: {fileID: 3307317230618660715}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 13.86, y: 0, z: 19.99}
+  m_LocalScale: {x: 35, y: 35, z: 35}
   m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6549808207737877743}
-  m_RootOrder: 2
+  m_Children:
+  - {fileID: 6861046152896096635}
+  - {fileID: 5374509913285457397}
+  - {fileID: 8429837873587300809}
+  - {fileID: 5575915010572171990}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6207672759231305573
-MeshFilter:
+--- !u!205 &43419207093874846
+LODGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8265266975803405875}
-  m_Mesh: {fileID: -6817786655991499921, guid: a53a074173dec274a8461f6ec886af89, type: 3}
---- !u!23 &6317318806992375602
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8265266975803405875}
+  m_GameObject: {fileID: 3307317230618660715}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0.0056198426, y: 0.052733466, z: 0.003489174}
+  m_Size: 0.16108027
+  m_FadeMode: 2
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.5075897
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8261272983921297911}
+  - screenRelativeHeight: 0.3136104
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8301301252386249700}
+  - screenRelativeHeight: 0.13296852
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 6440431750952209314}
+  - screenRelativeHeight: 0.033437483
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 249238289771850622}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: e67712959920e47429645c3be9225479, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 2.5104342
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &8277510625406440702
+--- !u!1 &8941120224171970670
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -324,9 +241,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4925958586980004197}
-  - component: {fileID: 7235723143764751115}
-  - component: {fileID: 9078897273143254900}
+  - component: {fileID: 5374509913285457397}
+  - component: {fileID: 7683403381848684443}
+  - component: {fileID: 8301301252386249700}
   m_Layer: 0
   m_Name: Hibiscus_Sans_Fleurs_LOD1
   m_TagString: Untagged
@@ -334,36 +251,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4925958586980004197
+--- !u!4 &5374509913285457397
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8277510625406440702}
+  m_GameObject: {fileID: 8941120224171970670}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6549808207737877743}
+  m_Father: {fileID: 6066078951928557695}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7235723143764751115
+--- !u!33 &7683403381848684443
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8277510625406440702}
+  m_GameObject: {fileID: 8941120224171970670}
   m_Mesh: {fileID: 4745005168911243742, guid: 1dddc34f5571e8f47b045e8b7afb9432, type: 3}
---- !u!23 &9078897273143254900
+--- !u!23 &8301301252386249700
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8277510625406440702}
+  m_GameObject: {fileID: 8941120224171970670}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -385,6 +302,89 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1.609577
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8970816363279741603
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8429837873587300809}
+  - component: {fileID: 6407645946839192565}
+  - component: {fileID: 6440431750952209314}
+  m_Layer: 0
+  m_Name: Hibiscus_Sans_Fleurs_LOD2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8429837873587300809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8970816363279741603}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.000010564162, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6066078951928557695}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &6407645946839192565
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8970816363279741603}
+  m_Mesh: {fileID: -6817786655991499921, guid: a53a074173dec274a8461f6ec886af89, type: 3}
+--- !u!23 &6440431750952209314
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8970816363279741603}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e67712959920e47429645c3be9225479, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 2.5104342
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
