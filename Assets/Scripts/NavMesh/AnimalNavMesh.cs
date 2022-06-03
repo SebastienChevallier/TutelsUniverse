@@ -16,6 +16,8 @@ public class AnimalNavMesh : MonoBehaviour
     public float anneeSpawn = 0;
     public List<GameObject> vueList;
     public List<GameObject> contactList;
+    public List<GameObject> ennemisList;
+    public Statut statut;
 
     [Header("Object Reference")]
     public MeshFilter mesh;
@@ -27,11 +29,26 @@ public class AnimalNavMesh : MonoBehaviour
     private float timeLeft;
     private float timeFoodLeft;
 
+    public enum Statut
+    {
+        Agressif,
+        Passif,
+    };
+
 
 
     private void Awake()
     {
         InitAnimal();
+        agent.updateRotation = false;
+    }
+
+    private void LateUpdate()
+    {
+        if (agent.velocity.sqrMagnitude > Mathf.Epsilon)
+        {
+            transform.rotation = Quaternion.LookRotation(agent.velocity.normalized);
+        }
     }
 
     public void InitAnimal()
@@ -73,8 +90,7 @@ public class AnimalNavMesh : MonoBehaviour
     void RefreshPv()
     {
         if(age < Animal_Data._Longevite)
-        {
-            
+        {            
             actualPV = Animal_Data._PVMax * Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite);
             animatorAnimal.SetFloat("PV", actualPV);
         }
@@ -111,7 +127,7 @@ public class AnimalNavMesh : MonoBehaviour
             destination /= (vueList.Count + 1);
         }
 
-        destination += (Random.insideUnitSphere * 10);
+        destination += (Random.insideUnitSphere * 15);
         destination.y = transform.position.y;
 
 
@@ -119,11 +135,20 @@ public class AnimalNavMesh : MonoBehaviour
 
         if (timeLeft < 0 && Time_Data._SelectedSpeed != 0)
         {
-            
             timeLeft = Time_Data._RateAnnee - Random.Range(-2f, Time_Data._RateAnnee);
             agent.SetDestination(destination);
-
-        }
-        
+        }        
     }
+
+    public bool CheckRace(GameObject animal)
+    {
+        if(animal.GetComponent<AnimalNavMesh>().Animal_Data._Regime == Animal.Regime.Carnivore)
+        {
+            ennemisList.Add(animal);
+            return true;
+        }
+        return false;
+    }
+
+    
 }
