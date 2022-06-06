@@ -21,6 +21,15 @@ public class TerrainParam : ScriptableObject
         Lomphore,
     };
 
+    public enum GraineType
+    {
+       Base,
+       Kaboom,
+       Infecte,
+       Gigantisme,
+    };
+
+
     public Texture2D[] brushIMG; // This will allow you to switch brushes
     
     public int brushSelection; // current selected brush
@@ -30,6 +39,7 @@ public class TerrainParam : ScriptableObject
     public float flattenHeight = 0; // the height to which the flatten mode will go
     public EffectType effectType;
     public AnimalType animalType;
+    public GraineType graineType;
     public bool isTerraforming = true;
 
     public void SetSize(int size)

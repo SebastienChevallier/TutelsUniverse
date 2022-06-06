@@ -13,13 +13,25 @@ public class ColliderContactAnimal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Animal"))
+        if (other.CompareTag("Animal") && !scriptParent.contactList.Contains(other.gameObject))
+        {            
             scriptParent.contactList.Add(other.gameObject);
+
+            if (other.GetComponent<AnimalNavMesh>().Animal_Data != scriptParent.Animal_Data )
+            {
+                scriptParent.animatorAnimal.SetBool("Fight", true);
+            }
+
+        }
     }
 
     private void OnTriggerExit(Collider other)
-    {
+    {       
         if (other.CompareTag("Animal"))
-            scriptParent.contactList.Remove(other.gameObject);
+        {
+            scriptParent.contactList.Remove(other.gameObject);            
+        }
+
+
     }
 }
