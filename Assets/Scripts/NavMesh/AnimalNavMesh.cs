@@ -11,6 +11,7 @@ public class AnimalNavMesh : MonoBehaviour
 
     [Header("Personal Variables")]
     public float actualPV;
+    public float actualDmg;
     public float foodGauge = 100;
     public float age = 1f;
     public float anneeSpawn = 0;
@@ -64,6 +65,8 @@ public class AnimalNavMesh : MonoBehaviour
         RefreshAge();
         RefreshSize();
         RefreshFood();
+
+        actualDmg = Mathf.Clamp(actualDmg, 0, Animal_Data._PVMax * Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite));
     }
 
     public void CheckLeader()
@@ -122,14 +125,19 @@ public class AnimalNavMesh : MonoBehaviour
     {
         if(age < Animal_Data._Longevite)
         {            
-            actualPV = Animal_Data._PVMax * Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite);
+            actualPV = Animal_Data._PVMax * Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite) - actualDmg;
             animatorAnimal.SetFloat("PV", actualPV);
         }
         else
         {
             Destroy(transform.gameObject);
         }
-        
+
+        if(actualPV < 0)
+        {
+            Destroy(transform.gameObject);
+        }
+
     }
 
     void RefreshSize()
@@ -194,19 +202,18 @@ public class AnimalNavMesh : MonoBehaviour
             }
             else
             {
-
+                Destroy(transform);
             }
                 
         }        
     }
-
     
 
     public void Chasse()
-    {
-        Vector3 destination = transform.position;
-        if(ennemisList.Count > 0)
+    {       
+        if (ennemisList.Count > 0)
         {
+            Vector3 destination = transform.position;
             destination = ennemisList[0].transform.position;
             cible = ennemisList[0];
             destination.y = transform.position.y;
@@ -219,22 +226,21 @@ public class AnimalNavMesh : MonoBehaviour
         else
         {
             cible = null;
+            //statut = Statut.Passif;
         }
     }
 
+    private float attTime;
     public void Attack()
-    {
-        Debug.Log(contactList.Contains(cible));
-
-        if (contactList.Contains(cible))
+    {     
+        if (cible != null && contactList.Contains(cible))
         {
-            animatorAnimal.SetBool("Fight", true);
-            timeLeft -= Time.deltaTime * Time_Data._SelectedSpeed;
-            if (timeLeft < 0 && Time_Data._SelectedSpeed != 0)
+            attTime -= Time.deltaTime * Time_Data._SelectedSpeed;
+            if (attTime < 0 && Time_Data._SelectedSpeed != 0)
             {
-                timeLeft = Time_Data._RateAnnee - Random.Range(-2f, Time_Data._RateAnnee);
-                cible.GetComponent<AnimalNavMesh>().actualPV -= Animal_Data._Degats;
-            }
+                attTime = 0.5f;
+                cible.GetComponent<AnimalNavMesh>().actualDmg += Animal_Data._Degats;
+            }                
         }
         else
         {
@@ -244,7 +250,25 @@ public class AnimalNavMesh : MonoBehaviour
 
     public void Fuite()
     {
+        agent.speed = Animal_Data._VitesseMax * Time_Data._SelectedSpeed * 1.5f;
+        Vector3 destination = new Vector3(0,0,0);
+        if (ennemisList.Count > 0)
+        {
+            foreach (GameObject obj in ennemisList)
+            {                
+                destination += obj.transform.position;
+            }
 
+            destination /= ennemisList.Count;
+            
+            Vector3 newdestination = transform.position + ((transform.position - destination).normalized) * 5;            
+            newdestination.y = transform.position.y;
+        
+
+            agent.SetDestination(newdestination);
+            Debug.Log(newdestination);
+        }
+        
     }
 
     public bool CheckRace(GameObject animal)

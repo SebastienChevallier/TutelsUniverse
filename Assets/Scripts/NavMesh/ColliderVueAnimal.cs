@@ -15,9 +15,10 @@ public class ColliderVueAnimal : MonoBehaviour
     {
         if(other.CompareTag("Animal") && !scriptParent.vueList.Contains(other.gameObject))
         {
-            if (other.GetComponent<AnimalNavMesh>().Animal_Data != scriptParent.Animal_Data)
+            if (other.GetComponent<AnimalNavMesh>().Animal_Data != scriptParent.Animal_Data && !scriptParent.ennemisList.Contains(other.gameObject))
             {
                 scriptParent.ennemisList.Add(other.gameObject);
+                
             }
             else
             {

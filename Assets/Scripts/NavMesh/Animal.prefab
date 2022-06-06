@@ -68,7 +68,7 @@ NavMeshAgent:
   m_Acceleration: 30
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -91,6 +91,7 @@ MonoBehaviour:
   Animal_Data: {fileID: 11400000, guid: 1ab6eeb9407b8a7449faee9027388839, type: 2}
   Time_Data: {fileID: 11400000, guid: 13a9e6f0058da6f4ead37a640999d199, type: 2}
   actualPV: 0
+  actualDmg: 0
   foodGauge: 100
   age: 0
   anneeSpawn: 0

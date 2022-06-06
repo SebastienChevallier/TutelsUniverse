@@ -13,7 +13,8 @@ public class AttackBehave : StateMachineBehaviour
      
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.GetComponent<AnimalNavMesh>().Attack();
+        if(animator.GetComponent<AnimalNavMesh>().cible)
+            animator.GetComponent<AnimalNavMesh>().Attack();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
