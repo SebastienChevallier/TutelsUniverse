@@ -94,12 +94,17 @@ MonoBehaviour:
   foodGauge: 100
   age: 0
   anneeSpawn: 0
+  isLeader: 0
+  cible: {fileID: 0}
+  statut: 1
   vueList: []
   contactList: []
+  ennemisList: []
   mesh: {fileID: 5506887744847652398}
   vue: {fileID: 5506887745500396205}
   contact: {fileID: 5506887745347172175}
   animatorAnimal: {fileID: 5506887744430730172}
+  timeLeft: 0
 --- !u!95 &5506887744430730172
 Animator:
   serializedVersion: 4

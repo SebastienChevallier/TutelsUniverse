@@ -14,10 +14,15 @@ public class AnimalNavMesh : MonoBehaviour
     public float foodGauge = 100;
     public float age = 1f;
     public float anneeSpawn = 0;
+    public bool isLeader = false;
+    public GameObject cible;
+    public Statut statut;
+
+    [Header("Contact Lists")]
     public List<GameObject> vueList;
     public List<GameObject> contactList;
     public List<GameObject> ennemisList;
-    public Statut statut;
+    
 
     [Header("Object Reference")]
     public MeshFilter mesh;
@@ -26,8 +31,10 @@ public class AnimalNavMesh : MonoBehaviour
 
     public Animator animatorAnimal;
     private NavMeshAgent agent;
-    private float timeLeft;
+    public float timeLeft;
     private float timeFoodLeft;
+
+    private float sizeMultiply;
 
     public enum Statut
     {
@@ -41,8 +48,8 @@ public class AnimalNavMesh : MonoBehaviour
     {
         InitAnimal();
         agent.updateRotation = false;
+        
     }
-
     private void LateUpdate()
     {
         if (agent.velocity.sqrMagnitude > Mathf.Epsilon)
@@ -50,6 +57,36 @@ public class AnimalNavMesh : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(agent.velocity.normalized);
         }
     }
+
+    private void Update()
+    {
+        RefreshPv();
+        RefreshAge();
+        RefreshSize();
+        RefreshFood();
+    }
+
+    public void CheckLeader()
+    {
+        if (vueList.Count > 0 && !isLeader)
+        {
+            foreach (GameObject obj in vueList)
+            {
+                if (obj.GetComponent<AnimalNavMesh>().isLeader)
+                {
+                    isLeader = false;
+                }
+                else
+                {
+                    isLeader = true;
+                }
+            }
+        }
+        else if(!isLeader)
+        {
+            isLeader = true;
+        }
+    }        
 
     public void InitAnimal()
     {
@@ -61,15 +98,9 @@ public class AnimalNavMesh : MonoBehaviour
         timeLeft = Random.Range(0f, 2f);
         mesh.gameObject.GetComponent<MeshRenderer>().material = Animal_Data._Material;
         anneeSpawn = Time_Data._Annee;
+        //CheckLeader();
     }
-
-    private void Update()
-    {        
-        RefreshPv();
-        RefreshAge();
-        RefreshSize();
-        RefreshFood();
-    }
+   
 
     void RefreshFood()
     {
@@ -103,8 +134,23 @@ public class AnimalNavMesh : MonoBehaviour
 
     void RefreshSize()
     {
-        Vector3 scale = Vector3.one * Animal_Data._CourbeScale.Evaluate(age / Animal_Data._Longevite);
+        setLeaderSize();
+        Vector3 scale = (Vector3.one * Animal_Data._CourbeScale.Evaluate(age / Animal_Data._Longevite)); 
+        scale += Vector3.one * sizeMultiply;
         mesh.transform.localScale = Vector3.Lerp(mesh.transform.localScale, scale, Time.deltaTime);
+    }
+
+    
+    private void setLeaderSize()
+    {
+        if (isLeader)
+        {
+            sizeMultiply = 2f;
+        }
+        else
+        {
+            sizeMultiply = 1f;
+        }
     }
 
     public void RefreshAge()
@@ -117,14 +163,20 @@ public class AnimalNavMesh : MonoBehaviour
     {
         agent.speed = Animal_Data._VitesseMax * Time_Data._SelectedSpeed;
         Vector3 destination = transform.position;
+        
 
-        if (vueList.Count > 0)
+        if (vueList.Count > 0 && !isLeader)
         {
-            foreach(GameObject obj in vueList)
+            
+            foreach (GameObject obj in vueList)
             {
-                destination += obj.transform.position;
-            }
-            destination /= (vueList.Count + 1);
+                if(obj.GetComponent<AnimalNavMesh>().isLeader)
+                    destination = obj.transform.position;
+            }            
+        }
+        else
+        {
+            destination = transform.position;
         }
 
         destination += (Random.insideUnitSphere * 15);
@@ -136,8 +188,63 @@ public class AnimalNavMesh : MonoBehaviour
         if (timeLeft < 0 && Time_Data._SelectedSpeed != 0)
         {
             timeLeft = Time_Data._RateAnnee - Random.Range(-2f, Time_Data._RateAnnee);
-            agent.SetDestination(destination);
+            if (agent.isOnNavMesh)
+            {
+                agent.SetDestination(destination);
+            }
+            else
+            {
+
+            }
+                
         }        
+    }
+
+    
+
+    public void Chasse()
+    {
+        Vector3 destination = transform.position;
+        if(ennemisList.Count > 0)
+        {
+            destination = ennemisList[0].transform.position;
+            cible = ennemisList[0];
+            destination.y = transform.position.y;
+
+            if (agent.isOnNavMesh)
+            {
+                agent.SetDestination(destination);
+            }
+        }
+        else
+        {
+            cible = null;
+        }
+    }
+
+    public void Attack()
+    {
+        Debug.Log(contactList.Contains(cible));
+
+        if (contactList.Contains(cible))
+        {
+            animatorAnimal.SetBool("Fight", true);
+            timeLeft -= Time.deltaTime * Time_Data._SelectedSpeed;
+            if (timeLeft < 0 && Time_Data._SelectedSpeed != 0)
+            {
+                timeLeft = Time_Data._RateAnnee - Random.Range(-2f, Time_Data._RateAnnee);
+                cible.GetComponent<AnimalNavMesh>().actualPV -= Animal_Data._Degats;
+            }
+        }
+        else
+        {
+            animatorAnimal.SetBool("Fight", false);
+        }
+    }
+
+    public void Fuite()
+    {
+
     }
 
     public bool CheckRace(GameObject animal)
