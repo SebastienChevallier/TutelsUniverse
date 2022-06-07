@@ -169,7 +169,7 @@ public class AnimalNavMesh : MonoBehaviour
     
     public void Movement()
     {
-        agent.speed = Animal_Data._VitesseMax * Time_Data._SelectedSpeed;
+        agent.speed = Animal_Data._VitesseMax * Time_Data._SelectedSpeed * 0.5f;
         Vector3 destination = transform.position;
         
 
@@ -213,6 +213,7 @@ public class AnimalNavMesh : MonoBehaviour
     {       
         if (ennemisList.Count > 0)
         {
+            CheckEnnemiList();
             Vector3 destination = transform.position;
             destination = ennemisList[0].transform.position;
             cible = ennemisList[0];
@@ -250,10 +251,11 @@ public class AnimalNavMesh : MonoBehaviour
 
     public void Fuite()
     {
-        agent.speed = Animal_Data._VitesseMax * Time_Data._SelectedSpeed * 1.5f;
+        agent.speed = Animal_Data._VitesseMax * Time_Data._SelectedSpeed;
         Vector3 destination = new Vector3(0,0,0);
         if (ennemisList.Count > 0)
         {
+            CheckEnnemiList();
             foreach (GameObject obj in ennemisList)
             {                
                 destination += obj.transform.position;
@@ -261,14 +263,25 @@ public class AnimalNavMesh : MonoBehaviour
 
             destination /= ennemisList.Count;
             
-            Vector3 newdestination = transform.position + ((transform.position - destination).normalized) * 5;            
+            Vector3 newdestination = transform.position + ((transform.position - destination).normalized) * 10;            
             newdestination.y = transform.position.y;
         
 
             agent.SetDestination(newdestination);
-            Debug.Log(newdestination);
+            
         }
         
+    }
+
+    public void CheckEnnemiList()
+    {
+        foreach(GameObject obj in ennemisList)
+        {
+            if(obj == null)
+            {
+                ennemisList.Remove(obj);
+            }
+        }
     }
 
     public bool CheckRace(GameObject animal)
