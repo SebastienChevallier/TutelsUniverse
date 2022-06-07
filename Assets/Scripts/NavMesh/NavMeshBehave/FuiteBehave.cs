@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WalkBehave : StateMachineBehaviour
+public class FuiteBehave : StateMachineBehaviour
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -13,15 +13,7 @@ public class WalkBehave : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
-        if(animator.GetComponent<AnimalNavMesh>().statut == AnimalNavMesh.Statut.Agressif)
-        {            
-            animator.GetComponent<AnimalNavMesh>().Chasse();
-        }
-        else
-        {
-            animator.GetComponent<AnimalNavMesh>().Movement();
-        }
+        animator.GetComponent<AnimalNavMesh>().Fuite();
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
