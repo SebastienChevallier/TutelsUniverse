@@ -16,17 +16,17 @@ public class Deplacement : MonoBehaviour
     void Update()
     {        
         Rotation();
-        Move();
+        
     }
     private void FixedUpdate()
     {
-        
+        Move();
     }
 
     void Move()
     {
         Vector3 dest = (Input.GetAxis("Horizontal") * speed * transform.right) + (Input.GetAxis("Vertical") * speed * transform.forward);
-        dest = Vector3.Lerp(Vector3.zero, dest, Time.deltaTime * 100);
+        dest = Vector3.Lerp(Vector3.zero, dest, Time.deltaTime * 50);
         rb.AddForce(dest, ForceMode.Impulse);
         //rb.velocity = dest * Time.deltaTime * 100f;
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -400, 400), transform.position.y, Mathf.Clamp(transform.position.z, -400, 400)); 
