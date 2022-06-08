@@ -20,7 +20,11 @@ public class Deplacement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Move();
+        if (!Input.GetMouseButton(0))
+        {
+            Move();
+        }
+            
     }
 
     void Move()

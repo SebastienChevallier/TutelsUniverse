@@ -20,6 +20,9 @@ MonoBehaviour:
   areaOfEffectSize: 17
   strength: 0.41950926
   flattenHeight: 0
-  effectType: 2
+  effectType: 0
   animalType: 2
-  isTerraforming: 1
+  graineType: 0
+  isTerraforming: 0
+  isSelectAnimal: 1
+  selectedAnimal: {fileID: 0}

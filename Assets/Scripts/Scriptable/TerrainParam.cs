@@ -30,8 +30,7 @@ public class TerrainParam : ScriptableObject
     };
 
 
-    public Texture2D[] brushIMG; // This will allow you to switch brushes
-    
+    public Texture2D[] brushIMG; // This will allow you to switch brushes    
     public int brushSelection; // current selected brush
     public int areaOfEffectSize = 100; // size of the brush
     [Range(0.01f, 2f)] // you can remove this if you want
@@ -41,6 +40,8 @@ public class TerrainParam : ScriptableObject
     public AnimalType animalType;
     public GraineType graineType;
     public bool isTerraforming = true;
+    public bool isSelectAnimal = false;
+    public GameObject selectedAnimal;
 
     public void SetSize(int size)
     {

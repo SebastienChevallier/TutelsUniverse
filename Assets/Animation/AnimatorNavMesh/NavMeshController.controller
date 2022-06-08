@@ -106,7 +106,7 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: Food
-    m_EventTreshold: 75
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 4289865755160388217}
   m_Solo: 0
@@ -188,16 +188,16 @@ AnimatorStateMachine:
     m_Position: {x: 180, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4289865755160388217}
-    m_Position: {x: 670, y: 110, z: 0}
+    m_Position: {x: 680, y: 140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3970574199358480180}
-    m_Position: {x: 480, y: -40, z: 0}
+    m_Position: {x: 480, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 233371818566231049}
     m_Position: {x: 180, y: -20, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1129229415024581747}
-    m_Position: {x: 450, y: 210, z: 0}
+    m_Position: {x: 480, y: 300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8088192730762983395}
     m_Position: {x: 880, y: 50, z: 0}
