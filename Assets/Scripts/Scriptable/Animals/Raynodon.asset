@@ -16,10 +16,10 @@ MonoBehaviour:
   _Mesh: {fileID: -7089432561855009611, guid: f9f99c17608448b4a91cd510d057eed1, type: 3}
   _Material: {fileID: 2100000, guid: 6259a81c8cdeee64988a0f8fa6ea3772, type: 2}
   _PVMax: 100
-  _Degats: 20
+  _Degats: 5
   _Longevite: 200
   _VitesseMax: 20
-  _Regime: 1
+  _Regime: 0
   _CourbeVitalite:
     serializedVersion: 2
     m_Curve:

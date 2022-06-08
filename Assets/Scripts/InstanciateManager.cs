@@ -19,7 +19,7 @@ public class InstanciateManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !paramTerrain.isTerraforming)
+        if (Input.GetMouseButtonDown(0) && !paramTerrain.isTerraforming && !paramTerrain.isSelectAnimal)
             SpawnAnimal();
     }
 
