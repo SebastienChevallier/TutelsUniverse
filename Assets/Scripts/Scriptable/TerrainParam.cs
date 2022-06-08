@@ -8,20 +8,40 @@ public class TerrainParam : ScriptableObject
     public enum EffectType
     {
         raise,
-        lower,
-        //flatten,
+        lower,        
         smooth,
     };
 
-    public Texture2D[] brushIMG; // This will allow you to switch brushes
-    
+    public enum AnimalType
+    {
+        Potamouss,
+        Lapillon,
+        Cerfeuil,
+        Raynodon,
+        Lomphore,
+    };
+
+    public enum GraineType
+    {
+       Base,
+       Kaboom,
+       Infecte,
+       Gigantisme,
+    };
+
+
+    public Texture2D[] brushIMG; // This will allow you to switch brushes    
     public int brushSelection; // current selected brush
     public int areaOfEffectSize = 100; // size of the brush
     [Range(0.01f, 2f)] // you can remove this if you want
     public float strength; // brush strength
     public float flattenHeight = 0; // the height to which the flatten mode will go
     public EffectType effectType;
+    public AnimalType animalType;
+    public GraineType graineType;
     public bool isTerraforming = true;
+    public bool isSelectAnimal = false;
+    public GameObject selectedAnimal;
 
     public void SetSize(int size)
     {
