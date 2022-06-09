@@ -5,6 +5,7 @@ public class Animal : ScriptableObject
 {
     public string _Name;
     public Mesh _Mesh;
+    public GameObject _PrefabAnimal;
     public Material _Material;
     public float _PVMax;
     public float _Degats;

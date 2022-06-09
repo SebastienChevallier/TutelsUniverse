@@ -25,6 +25,16 @@ public class UI_InGame : MonoBehaviour
         paramTerrain.isTerraforming = false;
     }
 
+    public void SelectAnimals()
+    {
+        paramTerrain.isTerraforming = true;
+    }
+
+    public void NotSelectAnimals()
+    {
+        paramTerrain.isTerraforming = false;
+    }
+
     public void Potamouss()
     {
         paramTerrain.animalType = TerrainParam.AnimalType.Potamouss;
