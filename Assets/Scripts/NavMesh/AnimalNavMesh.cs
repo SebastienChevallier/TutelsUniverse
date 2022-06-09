@@ -91,16 +91,20 @@ public class AnimalNavMesh : MonoBehaviour
         }
     }
 
+    private GameObject _Mesh;
+
     public void InitAnimal()
     {
         RefreshPv();
         //mesh.mesh = Animal_Data._Mesh;
-        Instantiate(Animal_Data._PrefabAnimal, transform.GetChild(0));
+        _Mesh = Instantiate(Animal_Data._PrefabAnimal, transform.GetChild(0));
+        _Mesh.transform.localPosition = Vector3.zero;
+
         agent = GetComponent<NavMeshAgent>();
         animatorAnimal = GetComponent<Animator>();
         agent.speed = Animal_Data._VitesseMax;
         timeLeft = Random.Range(0f, 2f);
-        mesh.gameObject.GetComponent<MeshRenderer>().material = Animal_Data._Material;
+        //mesh.gameObject.GetComponent<MeshRenderer>().material = Animal_Data._Material;
         anneeSpawn = Time_Data._Annee;
         //CheckLeader();
     }
@@ -145,8 +149,8 @@ public class AnimalNavMesh : MonoBehaviour
     {
         setLeaderSize();
         Vector3 scale = (Vector3.one * Animal_Data._CourbeScale.Evaluate(age / Animal_Data._Longevite));
-        scale += Vector3.one * sizeMultiply;
-        mesh.transform.localScale = Vector3.Lerp(mesh.transform.localScale, scale, Time.deltaTime);
+        scale += Vector3.one * sizeMultiply * 3;
+        _Mesh.transform.localScale = Vector3.Lerp(_Mesh.transform.localScale, scale, Time.deltaTime);
     }
 
 

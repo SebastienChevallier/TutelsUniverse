@@ -11,8 +11,12 @@ public class LoadSceneAsync : MonoBehaviour
 
     public void Start()
     {
-        StartCoroutine(LoadYourAsyncScene(3));
-        SceneManager.LoadScene(scene._SceneIndex, LoadSceneMode.Additive);
+        StartCoroutine(LoadYourAsyncScene(scene._SceneIndex));
+        if (scene._SceneIndex == 3)
+        {
+            SceneManager.LoadScene(4, LoadSceneMode.Additive);
+        }
+        
         
     }
 

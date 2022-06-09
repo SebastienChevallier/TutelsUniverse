@@ -24,7 +24,7 @@ MonoBehaviour:
     m_Value: 273.23
   gaussianMaxRadius:
     m_OverrideState: 1
-    m_Value: 1.5
+    m_Value: 0.811
   highQualitySampling:
     m_OverrideState: 0
     m_Value: 0
@@ -67,10 +67,10 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.335
+    m_Value: 0.075
   clamp:
     m_OverrideState: 1
-    m_Value: 0.022
+    m_Value: 0.01
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,3 +86,23 @@ MonoBehaviour:
   components:
   - {fileID: -6713497679944471744}
   - {fileID: -1937813098582292489}
+  - {fileID: 8212822679902163272}
+--- !u!114 &8212822679902163272
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb60a22f311433c4c962b888d1393f88, type: 3}
+  m_Name: PaniniProjection
+  m_EditorClassIdentifier: 
+  active: 1
+  distance:
+    m_OverrideState: 1
+    m_Value: 0.099
+  cropToFit:
+    m_OverrideState: 1
+    m_Value: 1

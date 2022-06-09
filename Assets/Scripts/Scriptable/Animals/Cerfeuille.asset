@@ -20,7 +20,7 @@ MonoBehaviour:
   _PVMax: 100
   _Degats: 20
   _Longevite: 200
-  _VitesseMax: 20
+  _VitesseMax: 5
   _Regime: 1
   _CourbeVitalite:
     serializedVersion: 2
