@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5506887744430730175}
   - component: {fileID: 5506887744430730172}
   - component: {fileID: 5506887744430730171}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Animal
   m_TagString: Animal
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5506887744430730113}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -87.6, y: 14.6, z: -49.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -68,7 +68,7 @@ NavMeshAgent:
   m_Acceleration: 30
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 1.5
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -95,13 +95,13 @@ MonoBehaviour:
   foodGauge: 100
   age: 0
   anneeSpawn: 0
-  isLeader: 0
+  isLeader: 1
   cible: {fileID: 0}
   statut: 1
   vueList: []
   contactList: []
   ennemisList: []
-  mesh: {fileID: 5506887744847652398}
+  mesh: {fileID: 0}
   vue: {fileID: 5506887745500396205}
   contact: {fileID: 5506887745347172175}
   animatorAnimal: {fileID: 5506887744430730172}
@@ -137,91 +137,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &5506887744847652399
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5506887744847652396}
-  - component: {fileID: 5506887744847652398}
-  - component: {fileID: 5506887744847652397}
-  m_Layer: 2
-  m_Name: Mesh
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5506887744847652396
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5506887744847652399}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5506887745605553346}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &5506887744847652398
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5506887744847652399}
-  m_Mesh: {fileID: 0}
---- !u!23 &5506887744847652397
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5506887744847652399}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: -1713170312160471214, guid: f9f99c17608448b4a91cd510d057eed1, type: 3}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
+  m_Radius: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &5506887745347172175
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +150,7 @@ GameObject:
   - component: {fileID: 5506887745347172174}
   - component: {fileID: 5506887745347172173}
   - component: {fileID: 5506887745347172172}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Contact
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +208,7 @@ GameObject:
   - component: {fileID: 5506887745500396204}
   - component: {fileID: 5506887745500396203}
   - component: {fileID: 5506887745500396202}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Vue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5506887745605553346}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,8 +282,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5506887744847652396}
+  m_Children: []
   m_Father: {fileID: 5506887744430730112}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -379,7 +295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5506887745706594288}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Detectors
   m_TagString: Untagged
   m_Icon: {fileID: 0}

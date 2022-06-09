@@ -11,5 +11,11 @@ public class UI_Menu : MonoBehaviour
         SceneManager.UnloadSceneAsync(1);
     }
 
-    
+    public void SceneAssets()
+    {
+        SceneManager.LoadScene(5, LoadSceneMode.Additive);
+        SceneManager.UnloadSceneAsync(1);
+    }
+
+
 }

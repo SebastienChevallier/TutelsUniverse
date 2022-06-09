@@ -194,6 +194,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  terrainParam: {fileID: 11400000, guid: 03b31a1be7c023345b7dc28fdf637ad4, type: 2}
 --- !u!1001 &294237318
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -776,15 +777,15 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 2147483647
-  m_UseGeometry: 0
+    m_Bits: 64
+  m_UseGeometry: 1
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.26333335
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: f620dfc1076f1444eacb4f5e743509b2, type: 2}
 --- !u!1 &987827387
@@ -980,7 +981,7 @@ PrefabInstance:
     - target: {fileID: 5506887744430730175, guid: 53f061a7905190d47bd8e6540c279784,
         type: 3}
       propertyPath: isLeader
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5506887744430730175, guid: 53f061a7905190d47bd8e6540c279784,
         type: 3}
@@ -1148,16 +1149,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Animal
-      objectReference: {fileID: 0}
-    - target: {fileID: 5506887744430730174, guid: 53f061a7905190d47bd8e6540c279784,
-        type: 3}
-      propertyPath: m_StoppingDistance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5506887744430730175, guid: 53f061a7905190d47bd8e6540c279784,
-        type: 3}
-      propertyPath: isLeader
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53f061a7905190d47bd8e6540c279784, type: 3}
@@ -1353,6 +1344,7 @@ GameObject:
   - component: {fileID: 1649845507}
   - component: {fileID: 1649845508}
   - component: {fileID: 1649845510}
+  - component: {fileID: 1649845511}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1441,6 +1433,22 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &1649845511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1649845504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca01d646803bb6744b5aca5ebf28cf4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainParam: {fileID: 11400000, guid: 03b31a1be7c023345b7dc28fdf637ad4, type: 2}
+  layer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!4 &1708334058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5506887744430730112, guid: 53f061a7905190d47bd8e6540c279784,
@@ -1781,7 +1789,7 @@ PrefabInstance:
     - target: {fileID: 5506887744430730175, guid: 53f061a7905190d47bd8e6540c279784,
         type: 3}
       propertyPath: isLeader
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5506887744430730175, guid: 53f061a7905190d47bd8e6540c279784,
         type: 3}
