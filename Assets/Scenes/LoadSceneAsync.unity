@@ -481,6 +481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadSlider: {fileID: 103530564}
+  scene: {fileID: 11400000, guid: 6dab9900b842afc4c807ea238ad5ed16, type: 2}
 --- !u!1 &1139108030
 GameObject:
   m_ObjectHideFlags: 0
