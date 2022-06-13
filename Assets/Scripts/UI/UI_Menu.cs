@@ -15,7 +15,7 @@ public class UI_Menu : MonoBehaviour
 
     public void Play()
     {
-        scene._SceneIndex = 2;
+        scene._SceneIndex = 3;
         SceneManager.LoadScene(2, LoadSceneMode.Additive);
         SceneManager.UnloadSceneAsync(1);
     }
