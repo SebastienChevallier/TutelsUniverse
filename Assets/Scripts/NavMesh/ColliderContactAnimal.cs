@@ -13,7 +13,7 @@ public class ColliderContactAnimal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Animal") && !scriptParent.contactList.Contains(other.gameObject))
+        if ((other.CompareTag("Animal") || other.CompareTag("Graine_1") || other.CompareTag("Graine_2") || other.CompareTag("Graine_3") || other.CompareTag("Graine_4")) && !scriptParent.contactList.Contains(other.gameObject))
         {            
             scriptParent.contactList.Add(other.gameObject);
 
@@ -27,7 +27,7 @@ public class ColliderContactAnimal : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {       
-        if (other.CompareTag("Animal"))
+        if (other.CompareTag("Animal") || other.CompareTag("Graine_1") || other.CompareTag("Graine_2") || other.CompareTag("Graine_3") || other.CompareTag("Graine_4"))
         {
             scriptParent.contactList.Remove(other.gameObject);            
         }
