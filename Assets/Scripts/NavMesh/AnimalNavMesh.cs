@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 
 public class AnimalNavMesh : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class AnimalNavMesh : MonoBehaviour
     public List<GameObject> vueList;
     public List<GameObject> contactList;
     public List<GameObject> ennemisList;
+    public List<GameObject> vegetablesList;
 
 
     [Header("Object Reference")]
@@ -34,6 +36,7 @@ public class AnimalNavMesh : MonoBehaviour
     private NavMeshAgent agent;
     public float timeLeft;
     private float timeFoodLeft;
+    public GameObject animalPrefab;
 
     private float sizeMultiply;
 
@@ -41,6 +44,9 @@ public class AnimalNavMesh : MonoBehaviour
     {
         Agressif,
         Passif,
+        Enflame,
+        Geant,
+        Infected,
     };
 
 
@@ -143,6 +149,51 @@ public class AnimalNavMesh : MonoBehaviour
             Destroy(transform.gameObject);
         }
 
+    }
+
+    public void Reproduction()
+    {
+        if (Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite) > 0.6f) 
+        {
+            foreach (GameObject obj in contactList)
+            {
+                if(obj.CompareTag("Animal") && obj.GetComponent<AnimalNavMesh>().Animal_Data == Animal_Data)
+                {
+                    animatorAnimal.SetBool("Reproduction", true);
+                    GameObject enfant = Instantiate(animalPrefab, GameObject.Find("Animals").transform);
+                    enfant.GetComponent<AnimalNavMesh>().Animal_Data = Animal_Data;
+                    enfant.GetComponent<AnimalNavMesh>().InitAnimal();
+                }
+            }
+        }
+        animatorAnimal.SetBool("Reproduction", false);
+    }
+
+    public bool RechercheNouriture()
+    {
+        foreach(GameObject obj in vueList)
+        {
+            if(obj.CompareTag("Graine_1") || obj.CompareTag("Graine_2") || obj.CompareTag("Graine_3") || obj.CompareTag("Graine_4"))
+            {
+                agent.SetDestination(obj.transform.position);
+                return true;
+            }
+            return false;
+        }
+        return false;
+
+    }
+
+    public void Manger()
+    {
+        foreach (GameObject obj in contactList)
+        {
+            if ((obj.CompareTag("Graine_1") || obj.CompareTag("Graine_2") || obj.CompareTag("Graine_3") || obj.CompareTag("Graine_4")) && (bool)Variables.Object(obj).Get("Is_Fruit"))
+            {
+                foodGauge += 50f;
+            }            
+        }
+        
     }
 
     void RefreshSize()
