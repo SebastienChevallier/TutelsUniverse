@@ -17,12 +17,18 @@ public class UI_InGame : MonoBehaviour
         sliderTaille.value = paramTerrain.areaOfEffectSize;
     }
 
+    private void Update()
+    {
+        sliderForce.value = paramTerrain.strength;
+        sliderTaille.value = paramTerrain.areaOfEffectSize;
+    }
+
     public void Return(int sceneInt)
     {
         if(sceneInt == 3)
         {
             SceneManager.UnloadSceneAsync(3);
-            SceneManager.UnloadSceneAsync(4);
+            //SceneManager.UnloadSceneAsync(4);
         }
         else
         {

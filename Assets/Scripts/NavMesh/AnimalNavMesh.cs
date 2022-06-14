@@ -24,7 +24,7 @@ public class AnimalNavMesh : MonoBehaviour
     public List<GameObject> vueList;
     public List<GameObject> contactList;
     public List<GameObject> ennemisList;
-    public List<GameObject> vegetablesList;
+    
 
 
     [Header("Object Reference")]
@@ -73,6 +73,14 @@ public class AnimalNavMesh : MonoBehaviour
         RefreshFood();
 
         actualDmg = Mathf.Clamp(actualDmg, 0, Animal_Data._PVMax * Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite));
+    }
+
+    public void CheckNavMesh()
+    {
+        if (!agent.isOnNavMesh)
+        {
+            Destroy(transform.gameObject);
+        }
     }
 
     public void CheckLeader()
@@ -322,7 +330,7 @@ public class AnimalNavMesh : MonoBehaviour
 
 
             agent.SetDestination(newdestination);
-            Debug.Log(newdestination);
+            //Debug.Log(newdestination);
         }
 
     }

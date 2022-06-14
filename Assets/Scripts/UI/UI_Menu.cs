@@ -13,6 +13,11 @@ public class UI_Menu : MonoBehaviour
         SceneManager.UnloadSceneAsync(1);
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
+
     public void Play()
     {
         scene._SceneIndex = 3;

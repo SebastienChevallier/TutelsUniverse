@@ -36,31 +36,31 @@ public class InstanciateManager : MonoBehaviour
                 case TerrainParam.AnimalType.Cerfeuil:
                     obj = Instantiate(prefabAnimal, hit.point, Quaternion.identity, GameObject.Find("Animals").transform);
                     obj.GetComponent<AnimalNavMesh>().Animal_Data = cerfeuil;
-                    obj.GetComponent<AnimalNavMesh>().InitAnimal();
+                    //obj.GetComponent<AnimalNavMesh>().InitAnimal();
                     break;
 
                 case TerrainParam.AnimalType.Lapillon:
                     obj = Instantiate(prefabAnimal, hit.point, Quaternion.identity, GameObject.Find("Animals").transform);
                     obj.GetComponent<AnimalNavMesh>().Animal_Data = lapillon;
-                    obj.GetComponent<AnimalNavMesh>().InitAnimal();
+                    //obj.GetComponent<AnimalNavMesh>().InitAnimal();
                     break;
 
                 case TerrainParam.AnimalType.Lomphore:
                     obj = Instantiate(prefabAnimal, hit.point, Quaternion.identity, GameObject.Find("Animals").transform);
                     obj.GetComponent<AnimalNavMesh>().Animal_Data = lomphore;
-                    obj.GetComponent<AnimalNavMesh>().InitAnimal();
+                    //obj.GetComponent<AnimalNavMesh>().InitAnimal();
                     break;
 
                 case TerrainParam.AnimalType.Potamouss:
                     obj = Instantiate(prefabAnimal, hit.point, Quaternion.identity, GameObject.Find("Animals").transform);
                     obj.GetComponent<AnimalNavMesh>().Animal_Data = potamouss;
-                    obj.GetComponent<AnimalNavMesh>().InitAnimal();
+                    //obj.GetComponent<AnimalNavMesh>().InitAnimal();
                     break;
 
                 case TerrainParam.AnimalType.Raynodon:
                     obj = Instantiate(prefabAnimal, hit.point, Quaternion.identity, GameObject.Find("Animals").transform);
                     obj.GetComponent<AnimalNavMesh>().Animal_Data = raynodon;
-                    obj.GetComponent<AnimalNavMesh>().InitAnimal();
+                    //obj.GetComponent<AnimalNavMesh>().InitAnimal();
                     break;
 
 

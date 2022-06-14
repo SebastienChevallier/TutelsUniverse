@@ -15,8 +15,8 @@ public class SelectAnimal : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && terrainParam.isSelectAnimal)
-            FocusAnimal();
+        //if (Input.GetMouseButtonDown(0) && terrainParam.isSelectAnimal)
+            //FocusAnimal();
     }
 
     public void FocusAnimal()
