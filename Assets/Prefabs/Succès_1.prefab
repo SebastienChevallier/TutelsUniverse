@@ -453,6 +453,7 @@ GameObject:
   - component: {fileID: 7145890906573413057}
   - component: {fileID: 8641000228815308929}
   - component: {fileID: 6163884550097681184}
+  - component: {fileID: 148949342811455781}
   m_Layer: 5
   m_Name: "Succ\xE8s_1"
   m_TagString: Untagged
@@ -597,6 +598,20 @@ MonoBehaviour:
     _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
     _objectReferences:
     - {fileID: 11400000, guid: 07dc509deb7d4cf4bb48ad881d5b33ea, type: 2}
+--- !u!114 &148949342811455781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7145890906573413059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d35c6c8fdd8ae747a49f01e4aadea89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  succes_Data: {fileID: 0}
+  selectedSucces: {fileID: 0}
 --- !u!1 &7145890907296862176
 GameObject:
   m_ObjectHideFlags: 0
