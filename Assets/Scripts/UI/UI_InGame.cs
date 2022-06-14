@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UI_InGame : MonoBehaviour
 {
@@ -14,6 +15,21 @@ public class UI_InGame : MonoBehaviour
     {
         sliderForce.value = paramTerrain.strength;
         sliderTaille.value = paramTerrain.areaOfEffectSize;
+    }
+
+    public void Return(int sceneInt)
+    {
+        if(sceneInt == 3)
+        {
+            SceneManager.UnloadSceneAsync(3);
+            SceneManager.UnloadSceneAsync(4);
+        }
+        else
+        {
+            SceneManager.UnloadSceneAsync(sceneInt);
+            SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        }
+        
     }
 
     public void Terraforming()
