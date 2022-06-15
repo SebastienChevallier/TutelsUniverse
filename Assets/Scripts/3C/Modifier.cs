@@ -40,6 +40,8 @@ public class Modifier : MonoBehaviour
         decalMat = decalProjector.transform.GetChild(0).GetComponent<DecalProjector>().material;
     }
 
+    
+
     void Update()
     {
         SetBrushSize(paramTerrain.areaOfEffectSize);
@@ -49,8 +51,7 @@ public class Modifier : MonoBehaviour
         if (Input.GetMouseButton(0) && paramTerrain.isTerraforming)
         {
             if (Physics.Raycast(ray, out hit, 500f, mask) && !EventSystem.current.IsPointerOverGameObject())
-            {
-                
+            {                
                 //targetTerrain = GetTerrainAtObject(hit.transform.gameObject);
                 SetEditValues(targetTerrain);
                 GetTerrainCoordinates(hit, out int terX, out int terZ);

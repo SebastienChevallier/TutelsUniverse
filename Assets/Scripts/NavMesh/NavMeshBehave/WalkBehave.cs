@@ -21,6 +21,7 @@ public class WalkBehave : StateMachineBehaviour
         else
         {
             animator.GetComponent<AnimalNavMesh>().Movement();
+            animator.GetComponent<AnimalNavMesh>().meshAnimator.SetFloat("Blend", animator.GetComponent<AnimalNavMesh>().agent.velocity.magnitude/ animator.GetComponent<AnimalNavMesh>().agent.speed);
         }
     }
 

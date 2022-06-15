@@ -27,6 +27,7 @@ public class UI_InGame : MonoBehaviour
     {
         if(sceneInt == 3)
         {
+            SceneManager.LoadScene(1, LoadSceneMode.Additive);
             SceneManager.UnloadSceneAsync(3);
             //SceneManager.UnloadSceneAsync(4);
         }

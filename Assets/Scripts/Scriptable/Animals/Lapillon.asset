@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Lapillon
   m_EditorClassIdentifier: 
   _Name: Lapillon
-  _Mesh: {fileID: 6020888708328797624, guid: 0e5966831cbf5844eaa53c228bef8527, type: 3}
-  _PrefabAnimal: {fileID: 5328145655833295845, guid: 12ad54aea130cf44499df5465bdf0f63,
+  _PrefabAnimal: {fileID: 5912680042599668214, guid: 372d8234fbd87a74e83391e1f0c479d4,
     type: 3}
-  _Material: {fileID: 2100000, guid: 43cf5a297ff4ff04991c18ca9ccbf528, type: 2}
+  _Animator: {fileID: 22100000, guid: 2d59f017b06a2a740b1b5ffa3d65656d, type: 2}
   _PVMax: 100
   _Degats: 20
   _Longevite: 300

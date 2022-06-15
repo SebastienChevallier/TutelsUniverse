@@ -33,7 +33,9 @@ public class AnimalNavMesh : MonoBehaviour
     public GameObject contact;
 
     public Animator animatorAnimal;
-    private NavMeshAgent agent;
+    public Animator meshAnimator;
+
+    public NavMeshAgent agent;
     public float timeLeft;
     private float timeFoodLeft;
     public GameObject animalPrefab;
@@ -63,10 +65,14 @@ public class AnimalNavMesh : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(agent.velocity.normalized);
         }
+
+        
     }
 
     private void Update()
     {
+        animatorAnimal.SetFloat("ActualTime", Time_Data._SelectedSpeed);
+        CheckNavMesh();
         RefreshPv();
         RefreshAge();
         RefreshSize();
@@ -79,6 +85,7 @@ public class AnimalNavMesh : MonoBehaviour
     {
         if (!agent.isOnNavMesh)
         {
+            Debug.Log("destroy");
             Destroy(transform.gameObject);
         }
     }
@@ -112,10 +119,15 @@ public class AnimalNavMesh : MonoBehaviour
         RefreshPv();
         //mesh.mesh = Animal_Data._Mesh;
         _Mesh = Instantiate(Animal_Data._PrefabAnimal, transform.GetChild(0));
+        _Mesh.name = Animal_Data._PrefabAnimal.name;
         _Mesh.transform.localPosition = Vector3.zero;
 
         agent = GetComponent<NavMeshAgent>();
+        meshAnimator = _Mesh.transform.GetChild(0).GetComponent<Animator>();
         animatorAnimal = GetComponent<Animator>();
+        meshAnimator.runtimeAnimatorController = Animal_Data._Animator;
+
+        
         agent.speed = Animal_Data._VitesseMax;
         timeLeft = Random.Range(0f, 2f);
         //mesh.gameObject.GetComponent<MeshRenderer>().material = Animal_Data._Material;
