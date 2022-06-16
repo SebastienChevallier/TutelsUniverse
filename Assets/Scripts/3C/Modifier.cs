@@ -40,6 +40,8 @@ public class Modifier : MonoBehaviour
         decalMat = decalProjector.transform.GetChild(0).GetComponent<DecalProjector>().material;
     }
 
+    
+
     void Update()
     {
         SetBrushSize(paramTerrain.areaOfEffectSize);
@@ -49,8 +51,7 @@ public class Modifier : MonoBehaviour
         if (Input.GetMouseButton(0) && paramTerrain.isTerraforming)
         {
             if (Physics.Raycast(ray, out hit, 500f, mask) && !EventSystem.current.IsPointerOverGameObject())
-            {
-                
+            {                
                 //targetTerrain = GetTerrainAtObject(hit.transform.gameObject);
                 SetEditValues(targetTerrain);
                 GetTerrainCoordinates(hit, out int terX, out int terZ);
@@ -64,11 +65,14 @@ public class Modifier : MonoBehaviour
             targetTerrain.gameObject.GetComponent<NavMeshSurface>().UpdateNavMesh(targetTerrain.gameObject.GetComponent<NavMeshSurface>().navMeshData);
         }
 
-        if (Physics.Raycast(ray, out hit, 500f) && paramTerrain.isTerraforming && !EventSystem.current.IsPointerOverGameObject())
+        if (Physics.Raycast(ray, out hit, 500f, mask) && paramTerrain.isTerraforming && !EventSystem.current.IsPointerOverGameObject())
         {
             decalProjector.SetActive(true);
             _gpu_scale(paramTerrain.brushIMG[paramTerrain.brushSelection], paramTerrain.areaOfEffectSize, paramTerrain.areaOfEffectSize, FilterMode.Trilinear);
-            decalProjector.transform.position = hit.point;
+
+            if(!Input.GetKey(KeyCode.LeftShift))
+                decalProjector.transform.position = hit.point;
+
             //decalProjector.transform.localScale = new Vector3(areaOfEffectSize , areaOfEffectSize , areaOfEffectSize );
             Texture2D tempTex = paramTerrain.brushIMG[paramTerrain.brushSelection];
             //tempTex.alphaIsTransparency = true;

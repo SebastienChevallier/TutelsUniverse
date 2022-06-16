@@ -24,7 +24,7 @@ public class AnimalNavMesh : MonoBehaviour
     public List<GameObject> vueList;
     public List<GameObject> contactList;
     public List<GameObject> ennemisList;
-    public List<GameObject> vegetablesList;
+    
 
 
     [Header("Object Reference")]
@@ -33,7 +33,9 @@ public class AnimalNavMesh : MonoBehaviour
     public GameObject contact;
 
     public Animator animatorAnimal;
-    private NavMeshAgent agent;
+    public Animator meshAnimator;
+
+    public NavMeshAgent agent;
     public float timeLeft;
     private float timeFoodLeft;
     public GameObject animalPrefab;
@@ -63,16 +65,29 @@ public class AnimalNavMesh : MonoBehaviour
         {
             transform.rotation = Quaternion.LookRotation(agent.velocity.normalized);
         }
+
+        
     }
 
     private void Update()
     {
+        animatorAnimal.SetFloat("ActualTime", Time_Data._SelectedSpeed);
+        CheckNavMesh();
         RefreshPv();
         RefreshAge();
         RefreshSize();
         RefreshFood();
 
         actualDmg = Mathf.Clamp(actualDmg, 0, Animal_Data._PVMax * Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite));
+    }
+
+    public void CheckNavMesh()
+    {
+        if (!agent.isOnNavMesh)
+        {
+            Debug.Log("destroy");
+            Destroy(transform.gameObject);
+        }
     }
 
     public void CheckLeader()
@@ -104,10 +119,15 @@ public class AnimalNavMesh : MonoBehaviour
         RefreshPv();
         //mesh.mesh = Animal_Data._Mesh;
         _Mesh = Instantiate(Animal_Data._PrefabAnimal, transform.GetChild(0));
+        _Mesh.name = Animal_Data._PrefabAnimal.name;
         _Mesh.transform.localPosition = Vector3.zero;
 
         agent = GetComponent<NavMeshAgent>();
+        meshAnimator = _Mesh.transform.GetChild(0).GetComponent<Animator>();
         animatorAnimal = GetComponent<Animator>();
+        meshAnimator.runtimeAnimatorController = Animal_Data._Animator;
+
+        
         agent.speed = Animal_Data._VitesseMax;
         timeLeft = Random.Range(0f, 2f);
         //mesh.gameObject.GetComponent<MeshRenderer>().material = Animal_Data._Material;
@@ -322,7 +342,7 @@ public class AnimalNavMesh : MonoBehaviour
 
 
             agent.SetDestination(newdestination);
-            Debug.Log(newdestination);
+            //Debug.Log(newdestination);
         }
 
     }

@@ -16,6 +16,6 @@ MonoBehaviour:
   _SpeedPause: 0
   _SpeedNormal: 1
   _SpeedX2: 2
-  _SpeedX3: 3
+  _SpeedX3: 10
   _RateAnnee: 10
-  _Annee: 478
+  _Annee: 614

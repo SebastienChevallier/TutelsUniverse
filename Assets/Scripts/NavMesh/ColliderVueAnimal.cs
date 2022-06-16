@@ -13,7 +13,12 @@ public class ColliderVueAnimal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if((other.CompareTag("Animal") || other.CompareTag("Graine_1") || other.CompareTag("Graine_2") || other.CompareTag("Graine_3") || other.CompareTag("Graine_4")) && !scriptParent.vueList.Contains(other.gameObject))
+        if (other.CompareTag("Graine_1") || other.CompareTag("Graine_2") || other.CompareTag("Graine_3") || other.CompareTag("Graine_4"))
+        {
+            scriptParent.vueList.Add(other.gameObject);
+        }
+
+        if((other.CompareTag("Animal")) && !scriptParent.vueList.Contains(other.gameObject))
         {
             if (other.GetComponent<AnimalNavMesh>().Animal_Data != scriptParent.Animal_Data && !scriptParent.ennemisList.Contains(other.gameObject))
             {
@@ -31,7 +36,12 @@ public class ColliderVueAnimal : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Animal") || other.CompareTag("Graine_1") || other.CompareTag("Graine_2") || other.CompareTag("Graine_3") || other.CompareTag("Graine_4"))
+        if(other.CompareTag("Graine_1") || other.CompareTag("Graine_2") || other.CompareTag("Graine_3") || other.CompareTag("Graine_4"))
+        {
+            scriptParent.vueList.Remove(other.gameObject);
+        }
+
+        if (other.CompareTag("Animal"))
         {   
             if (other.GetComponent<AnimalNavMesh>().Animal_Data != scriptParent.Animal_Data)
             {
