@@ -31,6 +31,7 @@ public class AnimalNavMesh : MonoBehaviour
     public MeshFilter mesh;
     public GameObject vue;
     public GameObject contact;
+    public GameObject _PrefabMort;
 
     public Animator animatorAnimal;
     public Animator meshAnimator;
@@ -64,14 +65,13 @@ public class AnimalNavMesh : MonoBehaviour
         if (agent.velocity.sqrMagnitude > Mathf.Epsilon)
         {
             transform.rotation = Quaternion.LookRotation(agent.velocity.normalized);
-        }
-
-        
+        }        
     }
 
     private void Update()
     {
-        animatorAnimal.SetFloat("ActualTime", Time_Data._SelectedSpeed);
+        CheckStatut();
+        meshAnimator.SetFloat("Time", Time_Data._SelectedSpeed);
         CheckNavMesh();
         RefreshPv();
         RefreshAge();
@@ -79,6 +79,46 @@ public class AnimalNavMesh : MonoBehaviour
         RefreshFood();
 
         actualDmg = Mathf.Clamp(actualDmg, 0, Animal_Data._PVMax * Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite));
+    }
+    private float statutTime;
+
+    public void CheckStatut()
+    {
+        statutTime -= Time.deltaTime * Time_Data._SelectedSpeed;
+        if (statutTime < 0 && Time_Data._SelectedSpeed != 0)
+        {
+            switch (statut)
+            {
+                case Statut.Agressif:
+                    setLeaderSize();
+                    statutTime = 1f;
+                    break;
+
+                case Statut.Enflame:
+                    setLeaderSize();
+                    statutTime = 1f;
+                    actualDmg += 2f;
+                    break;
+
+                case Statut.Geant:
+                    statutTime = 1f;
+                    sizeMultiply = 3;
+                    break;
+
+                case Statut.Infected:
+                    setLeaderSize();
+                    statutTime = 1f;
+                    actualDmg += 1f;
+                    break;
+
+                case Statut.Passif:
+                    setLeaderSize();
+                    statutTime = 1f;
+                    break;
+            }
+        }
+
+        
     }
 
     public void CheckNavMesh()
@@ -211,14 +251,19 @@ public class AnimalNavMesh : MonoBehaviour
             if ((obj.CompareTag("Graine_1") || obj.CompareTag("Graine_2") || obj.CompareTag("Graine_3") || obj.CompareTag("Graine_4")) && (bool)Variables.Object(obj).Get("Is_Fruit"))
             {
                 foodGauge += 50f;
-            }            
+                meshAnimator.SetTrigger("Manger");
+            }else if (Animal_Data._Regime == Animal.Regime.Carnivore && obj.CompareTag("Cadavre"))
+            {
+                foodGauge += 50f;
+                meshAnimator.SetTrigger("Manger");
+            }         
         }
         
     }
 
     void RefreshSize()
     {
-        setLeaderSize();
+        
         Vector3 scale = (Vector3.one * Animal_Data._CourbeScale.Evaluate(age / Animal_Data._Longevite));
         scale += Vector3.one * sizeMultiply * 3;
         _Mesh.transform.localScale = Vector3.Lerp(_Mesh.transform.localScale, scale, Time.deltaTime);
