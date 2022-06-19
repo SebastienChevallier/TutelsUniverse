@@ -31,12 +31,23 @@ public class ColliderVueAnimal : MonoBehaviour
             }
             
         }
+
+        if(other.CompareTag("Foudre") && !scriptParent.vueList.Contains(other.gameObject))
+        {
+            scriptParent.ennemisList.Add(other.gameObject);
+            scriptParent.animatorAnimal.SetTrigger("Fuite");
+        }
             
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("Graine_1") || other.CompareTag("Graine_2") || other.CompareTag("Graine_3") || other.CompareTag("Graine_4"))
+        if (other.CompareTag("Foudre"))
+        {
+            scriptParent.ennemisList.Remove(other.gameObject);
+        }
+
+        if (other.CompareTag("Graine_1") || other.CompareTag("Graine_2") || other.CompareTag("Graine_3") || other.CompareTag("Graine_4"))
         {
             scriptParent.vueList.Remove(other.gameObject);
         }
