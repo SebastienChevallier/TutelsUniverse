@@ -100,7 +100,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - FoamAmount: 1.5
+    - FoamAmount: 0.99
     - _AlphaClip: 0
     - _BUILTIN_QueueControl: -1
     - _BUILTIN_QueueOffset: 0
@@ -112,16 +112,16 @@ Material:
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _Distance: 3.78
+    - _Distance: 9.64
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _FoamAmount: 40.5
     - _FoamAmount2: 1.41
-    - _FoamAmount_2: 2.95
+    - _FoamAmount_2: 0.19
     - _FoamCutoff2: 2.4
-    - _FoamCuttoff: 5
+    - _FoamCuttoff: 2.83
     - _FoamCuttoff_2: 1.21
-    - _FoamScale: 50
+    - _FoamScale: 100
     - _FoamScale2: 1
     - _FoamScale_1: 3.63
     - _FoamScale_2: 20
@@ -132,16 +132,16 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HightFrequency: 1
+    - _HightFrequency: 0.5
     - _Metallic: 0
-    - _NormalStrengh: 11.21
+    - _NormalStrengh: 10.43
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RefractionSpeed: 0.1
-    - _RefractionStrength: 0.56
+    - _RefractionStrength: 1.58
     - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -155,13 +155,13 @@ Material:
     - FoamColor: {r: 1, g: 1, b: 1, a: 0.8039216}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DeepColor: {r: 0.10359552, g: 0.53450763, b: 0.5660378, a: 0.80784315}
+    - _DeepColor: {r: 0, g: 0.3692722, b: 0.3962264, a: 0.80784315}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 1, g: 0, b: 0, a: 0}
-    - _FoamColor_2: {r: 0.7924528, g: 0.7505874, b: 0.7505874, a: 0.3647059}
+    - _FoamColor_2: {r: 0.7924528, g: 0.74311143, b: 0.74311143, a: 0.3647059}
     - _RefrationScale: {r: 10, g: 10, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SurfaceColor: {r: 0.78039217, g: 0.88408595, b: 0.63079387, a: 0.5686275}
+    - _SurfaceColor: {r: 0.37123528, g: 0.8301887, b: 0.82554674, a: 0.7254902}
   m_BuildTextureStacks: []
 --- !u!114 &8248612704443551601
 MonoBehaviour:
