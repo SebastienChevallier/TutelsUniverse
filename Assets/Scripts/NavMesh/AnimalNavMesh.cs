@@ -24,16 +24,19 @@ public class AnimalNavMesh : MonoBehaviour
     public List<GameObject> vueList;
     public List<GameObject> contactList;
     public List<GameObject> ennemisList;
-    public List<GameObject> vegetablesList;
+    
 
 
     [Header("Object Reference")]
     public MeshFilter mesh;
     public GameObject vue;
     public GameObject contact;
+    public GameObject _PrefabMort;
 
     public Animator animatorAnimal;
-    private NavMeshAgent agent;
+    public Animator meshAnimator;
+
+    public NavMeshAgent agent;
     public float timeLeft;
     private float timeFoodLeft;
     public GameObject animalPrefab;
@@ -62,17 +65,69 @@ public class AnimalNavMesh : MonoBehaviour
         if (agent.velocity.sqrMagnitude > Mathf.Epsilon)
         {
             transform.rotation = Quaternion.LookRotation(agent.velocity.normalized);
-        }
+        }        
     }
 
     private void Update()
     {
+        CheckStatut();
+        meshAnimator.SetFloat("Time", Time_Data._SelectedSpeed);
+        CheckNavMesh();
         RefreshPv();
         RefreshAge();
         RefreshSize();
         RefreshFood();
 
         actualDmg = Mathf.Clamp(actualDmg, 0, Animal_Data._PVMax * Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite));
+    }
+    private float statutTime;
+
+    public void CheckStatut()
+    {
+        statutTime -= Time.deltaTime * Time_Data._SelectedSpeed;
+        if (statutTime < 0 && Time_Data._SelectedSpeed != 0)
+        {
+            switch (statut)
+            {
+                case Statut.Agressif:
+                    setLeaderSize();
+                    statutTime = 1f;
+                    break;
+
+                case Statut.Enflame:
+                    setLeaderSize();
+                    statutTime = 1f;
+                    actualDmg += 2f;
+                    break;
+
+                case Statut.Geant:
+                    statutTime = 1f;
+                    sizeMultiply = 3;
+                    break;
+
+                case Statut.Infected:
+                    setLeaderSize();
+                    statutTime = 1f;
+                    actualDmg += 1f;
+                    break;
+
+                case Statut.Passif:
+                    setLeaderSize();
+                    statutTime = 1f;
+                    break;
+            }
+        }
+
+        
+    }
+
+    public void CheckNavMesh()
+    {
+        if (!agent.isOnNavMesh)
+        {
+            Debug.Log("destroy");
+            Destroy(transform.gameObject);
+        }
     }
 
     public void CheckLeader()
@@ -104,10 +159,15 @@ public class AnimalNavMesh : MonoBehaviour
         RefreshPv();
         //mesh.mesh = Animal_Data._Mesh;
         _Mesh = Instantiate(Animal_Data._PrefabAnimal, transform.GetChild(0));
+        _Mesh.name = Animal_Data._PrefabAnimal.name;
         _Mesh.transform.localPosition = Vector3.zero;
 
         agent = GetComponent<NavMeshAgent>();
+        meshAnimator = _Mesh.transform.GetChild(0).GetComponent<Animator>();
         animatorAnimal = GetComponent<Animator>();
+        meshAnimator.runtimeAnimatorController = Animal_Data._Animator;
+
+        
         agent.speed = Animal_Data._VitesseMax;
         timeLeft = Random.Range(0f, 2f);
         //mesh.gameObject.GetComponent<MeshRenderer>().material = Animal_Data._Material;
@@ -191,14 +251,19 @@ public class AnimalNavMesh : MonoBehaviour
             if ((obj.CompareTag("Graine_1") || obj.CompareTag("Graine_2") || obj.CompareTag("Graine_3") || obj.CompareTag("Graine_4")) && (bool)Variables.Object(obj).Get("Is_Fruit"))
             {
                 foodGauge += 50f;
-            }            
+                meshAnimator.SetTrigger("Manger");
+            }else if (Animal_Data._Regime == Animal.Regime.Carnivore && obj.CompareTag("Cadavre"))
+            {
+                foodGauge += 50f;
+                meshAnimator.SetTrigger("Manger");
+            }         
         }
         
     }
 
     void RefreshSize()
     {
-        setLeaderSize();
+        
         Vector3 scale = (Vector3.one * Animal_Data._CourbeScale.Evaluate(age / Animal_Data._Longevite));
         scale += Vector3.one * sizeMultiply * 3;
         _Mesh.transform.localScale = Vector3.Lerp(_Mesh.transform.localScale, scale, Time.deltaTime);
@@ -322,7 +387,7 @@ public class AnimalNavMesh : MonoBehaviour
 
 
             agent.SetDestination(newdestination);
-            Debug.Log(newdestination);
+            //Debug.Log(newdestination);
         }
 
     }

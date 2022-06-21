@@ -127,7 +127,16 @@ public class JoystickCamera : MonoBehaviour
         else
         {
             camDir = Vector2.zero;
-        }        
+        }
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            camDir.x += 1;
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            camDir.x -= 1;
+        }
     }
        
 

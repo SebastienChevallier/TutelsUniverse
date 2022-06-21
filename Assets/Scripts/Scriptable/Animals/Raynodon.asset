@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Raynodon
   m_EditorClassIdentifier: 
   _Name: Cerfeuille
-  _Mesh: {fileID: -7089432561855009611, guid: f9f99c17608448b4a91cd510d057eed1, type: 3}
-  _PrefabAnimal: {fileID: 5840139867858505947, guid: b82cbd0afe969504283077d0e77e60bf,
+  _PrefabAnimal: {fileID: 2559833940005669959, guid: b827ea49eb35770449e829a9bdafdafd,
     type: 3}
-  _Material: {fileID: 2100000, guid: 6259a81c8cdeee64988a0f8fa6ea3772, type: 2}
+  _Animator: {fileID: 22100000, guid: 26faebc626809dc4eb96a423de42809a, type: 2}
   _PVMax: 100
   _Degats: 5
   _Longevite: 200

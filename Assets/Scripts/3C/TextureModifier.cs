@@ -149,6 +149,7 @@ public class TextureModifier : MonoBehaviour
 
         // Finally assign the new splatmap to the terrainData:
         terrainData.SetAlphamaps(0, 0, splatmapData);
+        
     }
 
     //This is to get the maximum altitude of your terrain. For some reason TerrainData.
