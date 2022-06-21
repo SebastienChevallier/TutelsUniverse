@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.Animations;
 
 [CreateAssetMenu(fileName = "Animal", menuName = "ScriptableObjects/Animal", order = 1)]
 public class Animal : ScriptableObject
 {
     public string _Name;
-    public Mesh _Mesh;
-    public Material _Material;
+    
+    public GameObject _PrefabAnimal;
+    public RuntimeAnimatorController _Animator;
     public float _PVMax;
     public float _Degats;
     public float _Longevite;

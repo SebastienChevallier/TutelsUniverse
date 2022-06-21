@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Cerfeuille
   m_EditorClassIdentifier: 
   _Name: Cerfeuille
-  _Mesh: {fileID: -7089432561855009611, guid: f9f99c17608448b4a91cd510d057eed1, type: 3}
-  _Material: {fileID: 2100000, guid: 793ae32294592724a9ba08a583263369, type: 2}
+  _PrefabAnimal: {fileID: 2242203553723036075, guid: bbb76119661315048ab4538c9b0b408f,
+    type: 3}
+  _Animator: {fileID: 9100000, guid: 3f19218573eac30408853c2ebbe82e18, type: 2}
   _PVMax: 100
   _Degats: 20
   _Longevite: 200
-  _VitesseMax: 20
+  _VitesseMax: 5
   _Regime: 1
   _CourbeVitalite:
     serializedVersion: 2

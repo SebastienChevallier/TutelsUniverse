@@ -7,11 +7,16 @@ using UnityEngine.SceneManagement;
 public class LoadSceneAsync : MonoBehaviour
 {
     public Slider loadSlider;
+    public ScriptableScene scene;
 
     public void Start()
     {
-        StartCoroutine(LoadYourAsyncScene(3));
-        SceneManager.LoadScene(4, LoadSceneMode.Additive);
+        StartCoroutine(LoadYourAsyncScene(scene._SceneIndex));
+        if (scene._SceneIndex == 3)
+        {
+            //SceneManager.LoadScene(4, LoadSceneMode.Additive);
+        }
+        
         
     }
 

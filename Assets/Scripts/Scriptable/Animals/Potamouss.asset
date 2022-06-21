@@ -13,12 +13,13 @@ MonoBehaviour:
   m_Name: Potamouss
   m_EditorClassIdentifier: 
   _Name: Potamouss
-  _Mesh: {fileID: -7089432561855009611, guid: f9f99c17608448b4a91cd510d057eed1, type: 3}
-  _Material: {fileID: 2100000, guid: 5fa307a2cb96ee14598c2a27b9c91e7c, type: 2}
+  _PrefabAnimal: {fileID: 8675544025194627884, guid: f2c5184b83ebd6e4b9cf5cd706cab70c,
+    type: 3}
+  _Animator: {fileID: 22100000, guid: 5828eb7fe1c230b478c4a8a430a14a59, type: 2}
   _PVMax: 100
   _Degats: 20
   _Longevite: 300
-  _VitesseMax: 10
+  _VitesseMax: 3
   _Regime: 1
   _CourbeVitalite:
     serializedVersion: 2
