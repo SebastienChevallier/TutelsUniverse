@@ -105,3 +105,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  moveClip: {fileID: 0}
+  gigatisme: {fileID: 2100000, guid: cefbafc25be252c44b942d35cc7281e6, type: 2}
+  enflame: {fileID: 2100000, guid: 1f8407da7bbccf1429a65ad5971fda5a, type: 2}
+  agressif: {fileID: 2100000, guid: 1f8407da7bbccf1429a65ad5971fda5a, type: 2}
+  empoisone: {fileID: 2100000, guid: 1f8407da7bbccf1429a65ad5971fda5a, type: 2}
+  normal: {fileID: 2100000, guid: 1f8407da7bbccf1429a65ad5971fda5a, type: 2}
