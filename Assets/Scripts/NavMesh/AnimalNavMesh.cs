@@ -24,8 +24,13 @@ public class AnimalNavMesh : MonoBehaviour
     public List<GameObject> vueList;
     public List<GameObject> contactList;
     public List<GameObject> ennemisList;
-    
 
+    [Header("FXs")]
+    public GameObject gigantisme;
+    public GameObject enflame;
+    public GameObject beni;
+    public GameObject empoisone;
+    public GameObject agressif;
 
     [Header("Object Reference")]
     public MeshFilter mesh;
@@ -91,22 +96,50 @@ public class AnimalNavMesh : MonoBehaviour
             {
                 case Statut.Agressif:
                     setLeaderSize();
+
+                    agressif.SetActive(true);
+                    gigantisme.SetActive(false);
+                    enflame.SetActive(false);
+                    beni.SetActive(false);
+                    empoisone.SetActive(false);
+
                     statutTime = 1f;
                     break;
 
                 case Statut.Enflame:
                     setLeaderSize();
+
+                    agressif.SetActive(false);
+                    gigantisme.SetActive(false);
+                    enflame.SetActive(true);
+                    beni.SetActive(false);
+                    empoisone.SetActive(false);
+
                     statutTime = 1f;
                     actualDmg += 2f;
                     break;
 
                 case Statut.Geant:
                     statutTime = 1f;
+
+                    agressif.SetActive(false);
+                    gigantisme.SetActive(true);
+                    enflame.SetActive(false);
+                    beni.SetActive(false);
+                    empoisone.SetActive(false);
+
                     sizeMultiply = 3;
                     break;
 
                 case Statut.Infected:
                     setLeaderSize();
+
+                    agressif.SetActive(false);
+                    gigantisme.SetActive(false);
+                    enflame.SetActive(false);
+                    beni.SetActive(false);
+                    empoisone.SetActive(true);
+
                     statutTime = 1f;
                     actualDmg += 1f;
                     break;

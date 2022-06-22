@@ -23,20 +23,26 @@ public class MeteorCaillouxScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        speed = 0;
 
-        ContactPoint contact = collision.contacts[0];
-        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-        Vector3 pos = contact.point;
-
-        if(impactPrefab != null)
+        if (collision.gameObject.CompareTag("Animal"))
         {
-            var impactVFX = Instantiate(impactPrefab, pos, rot) as GameObject;
-            Destroy(impactVFX, 5);
+            collision.gameObject.GetComponent<AnimalNavMesh>().statut = AnimalNavMesh.Statut.Enflame;
+            speed = 0;
+
+            ContactPoint contact = collision.contacts[0];
+            Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+            Vector3 pos = contact.point;
+
+            if (impactPrefab != null)
+            {
+                var impactVFX = Instantiate(impactPrefab, pos, rot) as GameObject;
+                Destroy(impactVFX, 5);
+            }
+            gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX;
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ;
         }
-        gameObject.GetComponent<Rigidbody>().isKinematic = true;
-        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX;
-        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ;
+        
 
     }
 }
