@@ -24,11 +24,16 @@ public class AnimalNavMesh : MonoBehaviour
     public List<GameObject> vueList;
     public List<GameObject> contactList;
     public List<GameObject> ennemisList;
-    
 
+    [Header("FXs")]
+    public GameObject gigantisme;
+    public GameObject enflame;
+    public GameObject beni;
+    public GameObject empoisone;
+    public GameObject agressif;
 
     [Header("Object Reference")]
-    public MeshFilter mesh;
+    public SkinnedMeshRenderer mesh;
     public GameObject vue;
     public GameObject contact;
     public GameObject _PrefabMort;
@@ -42,6 +47,7 @@ public class AnimalNavMesh : MonoBehaviour
     public GameObject animalPrefab;
 
     private float sizeMultiply;
+    private AudioSource _audioSource;
 
     public enum Statut
     {
@@ -91,28 +97,67 @@ public class AnimalNavMesh : MonoBehaviour
             {
                 case Statut.Agressif:
                     setLeaderSize();
+
+                    agressif.SetActive(true);
+                    gigantisme.SetActive(false);
+                    enflame.SetActive(false);
+                    beni.SetActive(false);
+                    empoisone.SetActive(false);
+
+                    mesh.material = Animal_Data.agressif;
+
                     statutTime = 1f;
                     break;
 
                 case Statut.Enflame:
                     setLeaderSize();
+
+                    agressif.SetActive(false);
+                    gigantisme.SetActive(false);
+                    enflame.SetActive(true);
+                    beni.SetActive(false);
+                    empoisone.SetActive(false);
+
+                    mesh.material = Animal_Data.enflame;
+
                     statutTime = 1f;
                     actualDmg += 2f;
                     break;
 
                 case Statut.Geant:
                     statutTime = 1f;
+
+                    agressif.SetActive(false);
+                    gigantisme.SetActive(true);
+                    enflame.SetActive(false);
+                    beni.SetActive(false);
+                    empoisone.SetActive(false);
+                    mesh.material = Animal_Data.gigatisme;
                     sizeMultiply = 3;
                     break;
 
                 case Statut.Infected:
                     setLeaderSize();
+
+                    agressif.SetActive(false);
+                    gigantisme.SetActive(false);
+                    enflame.SetActive(false);
+                    beni.SetActive(false);
+                    empoisone.SetActive(true);
+                    mesh.material = Animal_Data.empoisone;
                     statutTime = 1f;
                     actualDmg += 1f;
                     break;
 
                 case Statut.Passif:
                     setLeaderSize();
+
+                    agressif.SetActive(false);
+                    gigantisme.SetActive(false);
+                    enflame.SetActive(false);
+                    beni.SetActive(false);
+                    empoisone.SetActive(false);
+                    mesh.material = Animal_Data.normal;
                     statutTime = 1f;
                     break;
             }
@@ -162,8 +207,14 @@ public class AnimalNavMesh : MonoBehaviour
         _Mesh.name = Animal_Data._PrefabAnimal.name;
         _Mesh.transform.localPosition = Vector3.zero;
 
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.clip = Animal_Data.moveClip;
+
         agent = GetComponent<NavMeshAgent>();
         meshAnimator = _Mesh.transform.GetChild(0).GetComponent<Animator>();
+
+        mesh = meshAnimator.gameObject.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
+
         animatorAnimal = GetComponent<Animator>();
         meshAnimator.runtimeAnimatorController = Animal_Data._Animator;
 
@@ -292,7 +343,7 @@ public class AnimalNavMesh : MonoBehaviour
     {
         agent.speed = Animal_Data._VitesseMax * Time_Data._SelectedSpeed;
         Vector3 destination = transform.position;
-
+        _audioSource.Play();
 
         if (vueList.Count > 0 && !isLeader)
         {
