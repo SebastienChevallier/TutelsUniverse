@@ -96,7 +96,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - FoamAmount: 8.28
+    - FoamAmount: 8.29
     - _AlphaClip: 0
     - _BUILTIN_QueueControl: -1
     - _BUILTIN_QueueOffset: 0
@@ -115,7 +115,7 @@ Material:
     - _FoamAmount2: 1.41
     - _FoamCutoff2: 2.23
     - _FoamCuttoff: 2.51
-    - _FoamScale: 4.8
+    - _FoamScale: 3.65
     - _FoamScale2: 1
     - _FoamScale_1: 3.63
     - _FoamSpeed: 0.1
@@ -124,7 +124,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HightFrequency: 0.79
+    - _HightFrequency: 0.34
     - _Metallic: 0
     - _NormalStrengh: 13.33
     - _OcclusionStrength: 1
@@ -133,14 +133,14 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RefractionSpeed: 0.1
-    - _RefractionStrength: 0.4
+    - _RefractionStrength: 0.1
     - _Smoothness: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _WaveAmplitude: 0.01
-    - _WaveSpeed: 0.3
+    - _WaveAmplitude: 0.006
+    - _WaveSpeed: 0.001
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
