@@ -17,7 +17,7 @@ public class ColliderContactAnimal : MonoBehaviour
         {            
             scriptParent.contactList.Add(other.gameObject);
 
-            if (other.GetComponent<AnimalNavMesh>().Animal_Data != scriptParent.Animal_Data )
+            if (other.CompareTag("Animal") && other.GetComponent<AnimalNavMesh>().Animal_Data != scriptParent.Animal_Data )
             {
                 scriptParent.animatorAnimal.SetBool("Fight", true);
             }
