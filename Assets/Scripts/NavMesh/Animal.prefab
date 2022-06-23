@@ -1,6 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
-
 --- !u!1 &367865797277758746
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +476,6 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-
 --- !u!1 &5506887744430730113
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +512,7 @@ Transform:
   m_Children:
   - {fileID: 5506887745605553346}
   - {fileID: 5506887745706594288}
+  - {fileID: 6119356036530303819}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -580,15 +579,22 @@ MonoBehaviour:
   vueList: []
   contactList: []
   ennemisList: []
+  gigantisme: {fileID: 4306830520009132284}
+  enflame: {fileID: 7352451227383939287}
+  beni: {fileID: 367865797277758746}
+  empoisone: {fileID: 429012925900000587}
+  agressif: {fileID: 781880167861640593}
   mesh: {fileID: 0}
   vue: {fileID: 5506887745500396205}
   contact: {fileID: 5506887745347172175}
-  _PrefabMort: {fileID: 0}
+  _PrefabMort: {fileID: 4401381084031937442, guid: 9442fb45071ff1646a193a39eebea255,
+    type: 3}
   animatorAnimal: {fileID: 5506887744430730172}
   meshAnimator: {fileID: 0}
   agent: {fileID: 0}
   timeLeft: 0
   animalPrefab: {fileID: 5506887744430730113}
+  _audioSource: {fileID: 8930588051517083265}
 --- !u!95 &5506887744430730172
 Animator:
   serializedVersion: 4
@@ -898,7 +904,6 @@ Transform:
   m_Father: {fileID: 5506887744430730112}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-
 --- !u!1 &7352451227383939287
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,4 +1014,3 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-

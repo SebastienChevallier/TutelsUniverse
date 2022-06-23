@@ -105,10 +105,12 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  moveClip: {fileID: 0}
-  gigatisme: {fileID: 0}
+  gigatisme: {fileID: 2100000, guid: f749663d237008844842a5d96bc04c9c, type: 2}
   enflame: {fileID: 2100000, guid: 0140809ada942594fbfc92f143038b7d, type: 2}
   agressif: {fileID: 2100000, guid: 68c5d0b271c19d443a4dd48045ff8ed9, type: 2}
   empoisone: {fileID: 2100000, guid: 9f7485ef695efff459b60f4d104c5124, type: 2}
-  normal: {fileID: 0}
+  normal: {fileID: 2100000, guid: a0854c6a49d6c3b45b268da986faef51, type: 2}
   beni: {fileID: 2100000, guid: 9984a973a480c0940a7a85532466b32a, type: 2}
+  moveClip: {fileID: 8300000, guid: 706c0a8f749e7364885bff1a0fdc4d27, type: 3}
+  DeathClip: {fileID: 8300000, guid: 3bff61ac1c5e17d4fab78da79614d36e, type: 3}
+  AttackClip: {fileID: 8300000, guid: eec8aebdb6fde0e4b9b54e71c38cc184, type: 3}
