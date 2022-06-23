@@ -84,6 +84,7 @@ public class AnimalNavMesh : MonoBehaviour
         RefreshAge();
         RefreshSize();
         RefreshFood();
+        Reproduction();
 
         actualDmg = Mathf.Clamp(actualDmg, 0, Animal_Data._PVMax * Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite));
     }
@@ -216,9 +217,14 @@ public class AnimalNavMesh : MonoBehaviour
     {
         RefreshPv();
         //mesh.mesh = Animal_Data._Mesh;
-        _Mesh = Instantiate(Animal_Data._PrefabAnimal, transform.GetChild(0));
-        _Mesh.name = Animal_Data._PrefabAnimal.name;
-        _Mesh.transform.localPosition = Vector3.zero;
+
+        if(transform.GetChild(0).childCount == 0)
+        {
+            _Mesh = Instantiate(Animal_Data._PrefabAnimal, transform.GetChild(0));
+            _Mesh.name = Animal_Data._PrefabAnimal.name;
+            _Mesh.transform.localPosition = Vector3.zero;
+        }
+        
 
         _audioSource = GetComponent<AudioSource>();
         _audioSource.clip = Animal_Data.moveClip;
@@ -275,22 +281,39 @@ public class AnimalNavMesh : MonoBehaviour
 
     }
 
+    private int compteurEnfant;
+    private bool canRepro;
     public void Reproduction()
     {
-        if (Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite) > 0.6f) 
+        Debug.Log(Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite));
+        if (Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite) > 0.9f && compteurEnfant < 1) 
         {
-            foreach (GameObject obj in contactList)
+            canRepro = true;
+            //animatorAnimal.SetBool("Reproduction", true);
+            if(contactList.Count > 0)
             {
-                if(obj.CompareTag("Animal") && obj.GetComponent<AnimalNavMesh>().Animal_Data == Animal_Data)
+                foreach (GameObject obj in contactList)
                 {
-                    animatorAnimal.SetBool("Reproduction", true);
-                    GameObject enfant = Instantiate(animalPrefab, GameObject.Find("Animals").transform);
-                    enfant.GetComponent<AnimalNavMesh>().Animal_Data = Animal_Data;
-                    enfant.GetComponent<AnimalNavMesh>().InitAnimal();
+                    if (obj.CompareTag("Animal") && obj.GetComponent<AnimalNavMesh>().Animal_Data == Animal_Data && compteurEnfant < 1)
+                    {
+                        if(Animal_Data._CourbeVitalite.Evaluate(obj.GetComponent<AnimalNavMesh>().age / Animal_Data._Longevite) > 0.9f)
+                        {
+                            compteurEnfant++;
+                            GameObject enfant = Instantiate(animalPrefab, GameObject.Find("Animals").transform);
+                            enfant.GetComponent<AnimalNavMesh>().Animal_Data = Animal_Data;
+                            enfant.GetComponent<AnimalNavMesh>().InitAnimal();
+                            enfant.GetComponent<AnimalNavMesh>().isLeader = false;
+                        }                        
+                    }
                 }
-            }
+            }            
         }
-        animatorAnimal.SetBool("Reproduction", false);
+        else
+        {
+            canRepro = false;
+            //animatorAnimal.SetBool("Reproduction", false);
+        }
+        
     }
 
     public bool RechercheNouriture()
@@ -377,7 +400,15 @@ public class AnimalNavMesh : MonoBehaviour
             destination = transform.position;
         }
 
-        destination += (Random.insideUnitSphere * 15);
+        if (canRepro)
+        {
+            destination += (Random.insideUnitSphere * 2);
+        }
+        else
+        {
+            destination += (Random.insideUnitSphere * 15);
+        }
+        
         destination.y = transform.position.y;
 
 
