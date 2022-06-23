@@ -229,7 +229,7 @@ public class AnimalNavMesh : MonoBehaviour
         mesh = meshAnimator.gameObject.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
 
         animatorAnimal = GetComponent<Animator>();
-        meshAnimator.runtimeAnimatorController = Animal_Data._Animator;
+        //meshAnimator.runtimeAnimatorController = Animal_Data._Animator;
 
         
         agent.speed = Animal_Data._VitesseMax;
@@ -295,14 +295,19 @@ public class AnimalNavMesh : MonoBehaviour
 
     public bool RechercheNouriture()
     {
-        foreach(GameObject obj in vueList)
+        if (vueList != null)
         {
-            if(obj.CompareTag("Graine_1") || obj.CompareTag("Graine_2") || obj.CompareTag("Graine_3") || obj.CompareTag("Graine_4"))
+            foreach (GameObject obj in vueList)
             {
-                agent.SetDestination(obj.transform.position);
-                return true;
+                if (obj.CompareTag("Graine_1") || obj.CompareTag("Graine_2") || obj.CompareTag("Graine_3") || obj.CompareTag("Graine_4"))
+                {
+                    agent.SetDestination(obj.transform.position);
+                    return true;
+                }
+                return false;
             }
             return false;
+
         }
         return false;
 
