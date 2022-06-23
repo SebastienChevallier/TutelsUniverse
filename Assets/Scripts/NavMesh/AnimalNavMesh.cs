@@ -368,7 +368,7 @@ public class AnimalNavMesh : MonoBehaviour
 
             foreach (GameObject obj in vueList)
             {
-                if (obj.GetComponent<AnimalNavMesh>().isLeader)
+                if (obj.CompareTag("Animal") && obj.GetComponent<AnimalNavMesh>().isLeader)
                     destination = obj.transform.position;
             }
         }
