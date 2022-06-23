@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Potamouss
   m_EditorClassIdentifier: 
   _Name: Potamouss
-  _PrefabAnimal: {fileID: 8675544025194627884, guid: f2c5184b83ebd6e4b9cf5cd706cab70c,
+  _PrefabAnimal: {fileID: 8672324838009674691, guid: 56028118798675b4da9934c5f652b0aa,
     type: 3}
   _Animator: {fileID: 22100000, guid: 5828eb7fe1c230b478c4a8a430a14a59, type: 2}
   _PVMax: 100
@@ -105,3 +105,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  moveClip: {fileID: 0}
+  gigatisme: {fileID: 2100000, guid: 6151e229918765941be9c7cb7f4ed4d0, type: 2}
+  enflame: {fileID: 2100000, guid: 0140809ada942594fbfc92f143038b7d, type: 2}
+  agressif: {fileID: 2100000, guid: 68c5d0b271c19d443a4dd48045ff8ed9, type: 2}
+  empoisone: {fileID: 2100000, guid: 9f7485ef695efff459b60f4d104c5124, type: 2}
+  normal: {fileID: 2100000, guid: c6beedcbd5b838b4981a4bd4a1f48a56, type: 2}
+  beni: {fileID: 2100000, guid: 9984a973a480c0940a7a85532466b32a, type: 2}

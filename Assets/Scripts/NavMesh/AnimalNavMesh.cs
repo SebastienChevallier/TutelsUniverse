@@ -33,7 +33,7 @@ public class AnimalNavMesh : MonoBehaviour
     public GameObject agressif;
 
     [Header("Object Reference")]
-    public MeshFilter mesh;
+    public SkinnedMeshRenderer mesh;
     public GameObject vue;
     public GameObject contact;
     public GameObject _PrefabMort;
@@ -47,6 +47,7 @@ public class AnimalNavMesh : MonoBehaviour
     public GameObject animalPrefab;
 
     private float sizeMultiply;
+    public AudioSource _audioSource;
 
     public enum Statut
     {
@@ -55,6 +56,7 @@ public class AnimalNavMesh : MonoBehaviour
         Enflame,
         Geant,
         Infected,
+        Beni,
     };
 
 
@@ -103,6 +105,8 @@ public class AnimalNavMesh : MonoBehaviour
                     beni.SetActive(false);
                     empoisone.SetActive(false);
 
+                    mesh.material = Animal_Data.agressif;
+
                     statutTime = 1f;
                     break;
 
@@ -114,6 +118,8 @@ public class AnimalNavMesh : MonoBehaviour
                     enflame.SetActive(true);
                     beni.SetActive(false);
                     empoisone.SetActive(false);
+
+                    mesh.material = Animal_Data.enflame;
 
                     statutTime = 1f;
                     actualDmg += 2f;
@@ -127,7 +133,7 @@ public class AnimalNavMesh : MonoBehaviour
                     enflame.SetActive(false);
                     beni.SetActive(false);
                     empoisone.SetActive(false);
-
+                    mesh.material = Animal_Data.gigatisme;
                     sizeMultiply = 3;
                     break;
 
@@ -139,13 +145,32 @@ public class AnimalNavMesh : MonoBehaviour
                     enflame.SetActive(false);
                     beni.SetActive(false);
                     empoisone.SetActive(true);
-
+                    mesh.material = Animal_Data.empoisone;
                     statutTime = 1f;
                     actualDmg += 1f;
                     break;
 
                 case Statut.Passif:
                     setLeaderSize();
+
+                    agressif.SetActive(false);
+                    gigantisme.SetActive(false);
+                    enflame.SetActive(false);
+                    beni.SetActive(false);
+                    empoisone.SetActive(false);
+                    mesh.material = Animal_Data.normal;
+                    statutTime = 1f;
+                    break;
+
+                case Statut.Beni:
+                    setLeaderSize();
+
+                    agressif.SetActive(false);
+                    gigantisme.SetActive(false);
+                    enflame.SetActive(false);
+                    beni.SetActive(true);
+                    empoisone.SetActive(false);
+                    mesh.material = Animal_Data.beni;
                     statutTime = 1f;
                     break;
             }
@@ -195,8 +220,14 @@ public class AnimalNavMesh : MonoBehaviour
         _Mesh.name = Animal_Data._PrefabAnimal.name;
         _Mesh.transform.localPosition = Vector3.zero;
 
+        _audioSource = GetComponent<AudioSource>();
+        _audioSource.clip = Animal_Data.moveClip;
+
         agent = GetComponent<NavMeshAgent>();
         meshAnimator = _Mesh.transform.GetChild(0).GetComponent<Animator>();
+
+        mesh = meshAnimator.gameObject.transform.GetChild(0).GetComponent<SkinnedMeshRenderer>();
+
         animatorAnimal = GetComponent<Animator>();
         meshAnimator.runtimeAnimatorController = Animal_Data._Animator;
 
@@ -325,7 +356,7 @@ public class AnimalNavMesh : MonoBehaviour
     {
         agent.speed = Animal_Data._VitesseMax * Time_Data._SelectedSpeed;
         Vector3 destination = transform.position;
-
+        _audioSource.PlayOneShot(Animal_Data.moveClip);
 
         if (vueList.Count > 0 && !isLeader)
         {
@@ -393,6 +424,7 @@ public class AnimalNavMesh : MonoBehaviour
             if (attTime < 0 && Time_Data._SelectedSpeed != 0)
             {
                 attTime = 0.5f;
+                _audioSource.PlayOneShot(Animal_Data.AttackClip);
                 cible.GetComponent<AnimalNavMesh>().actualDmg += Animal_Data._Degats;
             }
         }

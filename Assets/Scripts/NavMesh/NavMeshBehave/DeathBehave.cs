@@ -8,6 +8,7 @@ public class DeathBehave : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animator.GetComponent<AnimalNavMesh>()._audioSource.PlayOneShot(animator.GetComponent<AnimalNavMesh>().Animal_Data.DeathClip);
         Instantiate(animator.GetComponent<AnimalNavMesh>()._PrefabMort, animator.transform.position, Quaternion.identity);
         animator.GetComponent<AnimalNavMesh>().meshAnimator.SetTrigger("Mort");
         
