@@ -15,13 +15,18 @@ public class Animal : ScriptableObject
     public Regime _Regime;
     public AnimationCurve _CourbeVitalite;
     public AnimationCurve _CourbeScale;
-    public AudioClip moveClip;
+    
 
     public Material gigatisme;
     public Material enflame;
     public Material agressif;
     public Material empoisone;
     public Material normal;
+    public Material beni;
+
+    public AudioClip moveClip;
+    public AudioClip DeathClip;
+    public AudioClip AttackClip;
 
     public enum Regime
     {

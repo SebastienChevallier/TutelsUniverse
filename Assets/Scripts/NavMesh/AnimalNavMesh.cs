@@ -47,7 +47,7 @@ public class AnimalNavMesh : MonoBehaviour
     public GameObject animalPrefab;
 
     private float sizeMultiply;
-    private AudioSource _audioSource;
+    public AudioSource _audioSource;
 
     public enum Statut
     {
@@ -56,6 +56,7 @@ public class AnimalNavMesh : MonoBehaviour
         Enflame,
         Geant,
         Infected,
+        Beni,
     };
 
 
@@ -158,6 +159,18 @@ public class AnimalNavMesh : MonoBehaviour
                     beni.SetActive(false);
                     empoisone.SetActive(false);
                     mesh.material = Animal_Data.normal;
+                    statutTime = 1f;
+                    break;
+
+                case Statut.Beni:
+                    setLeaderSize();
+
+                    agressif.SetActive(false);
+                    gigantisme.SetActive(false);
+                    enflame.SetActive(false);
+                    beni.SetActive(true);
+                    empoisone.SetActive(false);
+                    mesh.material = Animal_Data.beni;
                     statutTime = 1f;
                     break;
             }
@@ -343,7 +356,7 @@ public class AnimalNavMesh : MonoBehaviour
     {
         agent.speed = Animal_Data._VitesseMax * Time_Data._SelectedSpeed;
         Vector3 destination = transform.position;
-        _audioSource.Play();
+        _audioSource.PlayOneShot(Animal_Data.moveClip);
 
         if (vueList.Count > 0 && !isLeader)
         {
@@ -411,6 +424,7 @@ public class AnimalNavMesh : MonoBehaviour
             if (attTime < 0 && Time_Data._SelectedSpeed != 0)
             {
                 attTime = 0.5f;
+                _audioSource.PlayOneShot(Animal_Data.AttackClip);
                 cible.GetComponent<AnimalNavMesh>().actualDmg += Animal_Data._Degats;
             }
         }
