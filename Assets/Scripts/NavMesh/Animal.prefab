@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb0ee4bbcef5e1428681cc0a2b9df43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animal_Data: {fileID: 11400000, guid: 1ab6eeb9407b8a7449faee9027388839, type: 2}
+  Animal_Data: {fileID: 11400000, guid: 8cd753a761f9dca4bbf94fb2368d415f, type: 2}
   Time_Data: {fileID: 11400000, guid: 13a9e6f0058da6f4ead37a640999d199, type: 2}
   actualPV: 0
   actualDmg: 0

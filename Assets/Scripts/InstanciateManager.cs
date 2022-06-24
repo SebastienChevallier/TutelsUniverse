@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class InstanciateManager : MonoBehaviour
 {
@@ -28,7 +29,7 @@ public class InstanciateManager : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, mask))
+        if (Physics.Raycast(ray, out hit, 1000f, mask) && !EventSystem.current.IsPointerOverGameObject())
         {
             switch (paramTerrain.animalType)
             {

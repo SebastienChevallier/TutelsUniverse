@@ -184,7 +184,7 @@ public class AnimalNavMesh : MonoBehaviour
     {
         if (!agent.isOnNavMesh)
         {
-            Debug.Log("destroy");
+            
             Destroy(transform.gameObject);
         }
     }
@@ -285,7 +285,7 @@ public class AnimalNavMesh : MonoBehaviour
     private bool canRepro;
     public void Reproduction()
     {
-        Debug.Log(Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite));
+        
         if (Animal_Data._CourbeVitalite.Evaluate(age / Animal_Data._Longevite) > 0.9f && compteurEnfant < 1) 
         {
             canRepro = true;
@@ -357,8 +357,8 @@ public class AnimalNavMesh : MonoBehaviour
     {
         
         Vector3 scale = (Vector3.one * Animal_Data._CourbeScale.Evaluate(age / Animal_Data._Longevite));
-        scale += Vector3.one * sizeMultiply * 3;
-        _Mesh.transform.localScale = Vector3.Lerp(_Mesh.transform.localScale, scale, Time.deltaTime);
+        scale += Vector3.one * sizeMultiply;
+        transform.GetChild(0).transform.localScale = Vector3.Lerp(_Mesh.transform.localScale, scale, Time.deltaTime);
     }
 
 
@@ -384,15 +384,22 @@ public class AnimalNavMesh : MonoBehaviour
     {
         agent.speed = Animal_Data._VitesseMax * Time_Data._SelectedSpeed;
         Vector3 destination = transform.position;
-        _audioSource.PlayOneShot(Animal_Data.moveClip);
+        
 
         if (vueList.Count > 0 && !isLeader)
         {
 
             foreach (GameObject obj in vueList)
             {
-                if (obj.CompareTag("Animal") && obj.GetComponent<AnimalNavMesh>().isLeader)
+                if (obj!= null && obj.CompareTag("Animal") && obj.GetComponent<AnimalNavMesh>().isLeader)
                     destination = obj.transform.position;
+
+                if (obj == null)
+                {
+                    vueList.Remove(obj);
+                    break;
+                }
+                    
             }
         }
         else
@@ -420,6 +427,7 @@ public class AnimalNavMesh : MonoBehaviour
             if (agent.isOnNavMesh)
             {
                 agent.SetDestination(destination);
+                _audioSource.PlayOneShot(Animal_Data.moveClip);
             }
             else
             {
