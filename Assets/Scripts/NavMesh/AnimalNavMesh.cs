@@ -294,17 +294,24 @@ public class AnimalNavMesh : MonoBehaviour
             {
                 foreach (GameObject obj in contactList)
                 {
-                    if (obj.CompareTag("Animal") && obj.GetComponent<AnimalNavMesh>().Animal_Data == Animal_Data && compteurEnfant < 1)
+                    if (obj != null)
                     {
-                        if(Animal_Data._CourbeVitalite.Evaluate(obj.GetComponent<AnimalNavMesh>().age / Animal_Data._Longevite) > 0.9f)
+                        if (obj.CompareTag("Animal") && obj.GetComponent<AnimalNavMesh>().Animal_Data == Animal_Data && compteurEnfant < 1)
                         {
-                            compteurEnfant++;
-                            GameObject enfant = Instantiate(animalPrefab, GameObject.Find("Animals").transform);
-                            enfant.GetComponent<AnimalNavMesh>().Animal_Data = Animal_Data;
-                            enfant.GetComponent<AnimalNavMesh>().InitAnimal();
-                            enfant.GetComponent<AnimalNavMesh>().isLeader = false;
-                        }                        
+                            if (Animal_Data._CourbeVitalite.Evaluate(obj.GetComponent<AnimalNavMesh>().age / Animal_Data._Longevite) > 0.9f)
+                            {
+                                compteurEnfant++;
+                                GameObject enfant = Instantiate(animalPrefab, GameObject.Find("Animals").transform);
+                                enfant.GetComponent<AnimalNavMesh>().Animal_Data = Animal_Data;
+                                enfant.GetComponent<AnimalNavMesh>().InitAnimal();
+                                enfant.GetComponent<AnimalNavMesh>().isLeader = false;
+                            }
+                        }
                     }
+                    else
+                    {
+                        contactList.Remove(obj);
+                    }                    
                 }
             }            
         }
@@ -322,7 +329,7 @@ public class AnimalNavMesh : MonoBehaviour
         {
             foreach (GameObject obj in vueList)
             {
-                if (obj.CompareTag("Graine_1") || obj.CompareTag("Graine_2") || obj.CompareTag("Graine_3") || obj.CompareTag("Graine_4"))
+                if ( obj != null && obj.CompareTag("Graine_1") || obj.CompareTag("Graine_2") || obj.CompareTag("Graine_3") || obj.CompareTag("Graine_4"))
                 {
                     agent.SetDestination(obj.transform.position);
                     return true;
@@ -340,7 +347,7 @@ public class AnimalNavMesh : MonoBehaviour
     {
         foreach (GameObject obj in contactList)
         {
-            if ((obj.CompareTag("Graine_1") || obj.CompareTag("Graine_2") || obj.CompareTag("Graine_3") || obj.CompareTag("Graine_4")) && (bool)Variables.Object(obj).Get("Is_Fruit"))
+            if (obj != null && (obj.CompareTag("Graine_1") || obj.CompareTag("Graine_2") || obj.CompareTag("Graine_3") || obj.CompareTag("Graine_4")) && (bool)Variables.Object(obj).Get("Is_Fruit"))
             {
                 foodGauge += 50f;
                 meshAnimator.SetTrigger("Manger");
