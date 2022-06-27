@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb0ee4bbcef5e1428681cc0a2b9df43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Animal_Data: {fileID: 11400000, guid: 8cd753a761f9dca4bbf94fb2368d415f, type: 2}
+  Animal_Data: {fileID: 11400000, guid: a15132292d664e24c852aa2f1df4413c, type: 2}
   Time_Data: {fileID: 11400000, guid: 13a9e6f0058da6f4ead37a640999d199, type: 2}
   actualPV: 0
   actualDmg: 0
@@ -640,7 +640,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.127
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -649,9 +649,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 30.571762
+  MaxDistance: 40
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -684,7 +684,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
